@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="cache-control" content="no-cache">
+<meta name="description" content="Backgammon Kifu Viewer">
+<meta name="author" content="(C)hinacoppy 2018">
+<link rel="stylesheet" href="KifuViewer.css">
+<title>BG Kifu Viewer</title>
+</head>
+
+<body class="container">
+<header class="header">
+<div id="pageinfodisp" class="pagetitle">Kifu Viewer</div>
+<div id="matchinfodisp" class="infodisp">&nbsp;</div>
+<div id="gameinfodisp" class="infodisp">(C)hinacoppy</div>
+</header>
+
+<section class="mainarea">
+<div id="p1name" class="playername">&nbsp;</div><div id="p1pip" class="pip">&nbsp;</div>
+<div id="mainboard" class="mainboard"><img src="./board.png"></div>
+<div id="p2name" class="playername">&nbsp;</div><div id="p2pip" class="pip">&nbsp;</div>
+</section>
+
+<nav class="nav">
+<p>
+<button id="prevGameBtn" class="navbutton"><i class="fas fa-angle-double-left fa-2x"></i></button>&emsp;
+<button id="prevPlayBtn" class="navbutton"><i class="fas fa-angle-left fa-2x"></i></button>&emsp;
+<button id="autoplayBtn" class="navbutton"><i class="far fa-play-circle fa-2x"></i></button>&emsp;
+<button id="nextPlayBtn" class="navbutton"><i class="fas fa-angle-right fa-2x"></i></button>&emsp;
+<button id="nextGameBtn" class="navbutton"><i class="fas fa-angle-double-right fa-2x"></i></button>&emsp;
+</p>
+
+<p>Select game:
+<select id="gameSelect" class="jumpselect"></select>
+<button id="gameGoBtn" class="normalbutton"><i class="fas fa-share"></i></button>&emsp;
+Select play:
+<select id="playSelect" class="jumpselect"></select>
+<button id="playGoBtn" class="normalbutton"><i class="fas fa-share"></i></button>
+</p>
+
+<p>Speed:
+<label><input type="radio" name="animspeed" value="0"> Fast</label>&emsp;
+<label><input type="radio" name="animspeed" value="1" checked> Medium</label>&emsp;
+<label><input type="radio" name="animspeed" value="2"> Slow</label>&emsp;
+</p>
+
+<p>
+<label><input type="checkbox" id="animFlag" checked>Chequer with Animation</label>&emsp;
+<label><input type="checkbox" id="waitFlag" checked>Wait before playing</label>
+</p>
+
+<p>Kifu from Local: <input type="file" id="localKifuFile"></p>
+<p id="dropzone" class="dropzone">Kifu file Drag and Drop Here</p>
+<p>Kifu from Internet: <input type="text" id="inetKifuURL"><button id="urldownload"><i class="fas fa-cloud-download-alt"></i></button></p>
+
+<p>
+<button id="gamestart" class="bigbutton"><i class="fas fa-paper-plane fa-2x"></i></button>&emsp;
+<button id="analyse" class="bigbutton"><i class="far fa-sun fa-2x"></i></button>&emsp;
+<button id="flipHoriz" class="bigbutton"><i class="fas fa-exchange-alt fa-2x"></i></button>&emsp;
+<a href="./"><button class="bigbutton"><i class="fas fa-home fa-2x"></i></button></a>&emsp;
+</p>
+<br><br>
+<p id="rolldisp" class="infodisp">&nbsp;</p>
+<p id="movedisp" class="infodisp">&nbsp;</p>
+</nav>
+
+<footer class="footer">
+<p>Powered by Kifu Viewer -- inspired by BG Replay &emsp; (C)hinacoppy 2018 &emsp;</p>
+</footer>
+
+<aside class="aside">
+<textarea id="gamesource" cols="70" rows="20" style="display:none"></textarea>
+<textarea id="gamescript" cols="70" rows="20" style="display:none"></textarea>
+</aside>
+
+<section id="analysisResult" class="modalArea">
+  <div class="modalContents">
+    <h3 class="modalTitleContainer">
+      <span class="modalTitle">Analysis Result</span>
+      <button id="closeResult" class="closeModal"><i class="fas fa-times"></i></button>
+    </h3>
+    <pre id="analysisresult"></pre>
+  </div>
+</section>
+
+<script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous" data-auto-replace-svg="nest"></script>
+<script src="jquery-3.3.1.min.js"></script>
+<script src="BgXgid_class.js"></script>
+<script src="BgBoard_class2.js"></script>
+<script src="BgGame_class2.js"></script>
+<script src="BgUtil_class.js"></script>
+<script>
+myGame = new BgGame();
+</script>
+</body>
+</html>
