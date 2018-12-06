@@ -8,7 +8,6 @@ class BgBoard {
     this.horizOrientation = "L"; // L or R
     this.playcols = [" ", "w", "b"];
     this.toPointArray = new Array(28);
-//    this.imgpath = "./";
     this.boardimg = "./board.png";
     this.mainBoard = $('#mainboard'); //need to define before prepareBoard()
     this.prepareBoard();
@@ -121,8 +120,7 @@ class BgBoard {
   }
 
   resetBoard() {
-//    this.showBoard("XGID=--------------------------:0:0:0:00:0:0:0:0:0");
-    this.showBoard("XGID=f------g---------F-------E:2:-1:1:65:0:0:0:0:0");
+    this.showBoard("XGID=--------------------------:0:0:0:00:0:0:0:0:0");
   }
 
   showBoard(xgidstr) { // input for XGID string
