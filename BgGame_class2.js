@@ -279,7 +279,7 @@ console.log("loadInetKifuAjax", query);
   //サーバ内の棋譜をロード
   loadServerKifuAjax(query) {
     const file = query.substr("?s=".length);
-    const filepath = "../bgKifuViewer/scripts/" + file;
+    const filepath = "/bgKifuViewer/scripts/" + file;
 //console.log("loadServerKifuAjax", query, filepath);
     $.ajax({
       url: filepath,
