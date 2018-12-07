@@ -43,10 +43,18 @@ class BgBoard {
     // cube
     xh += '<div id="cubeDisp" class="cube">64</div>';
     // dice
-    xh += '<span id="dice10"></span>';
-    xh += '<span id="dice11"></span>';
-    xh += '<span id="dice20"></span>';
-    xh += '<span id="dice21"></span>';
+    xh += '<span id="dice10" class="dice fa-layers fa-fw">';
+    xh += '<i class="fas fa-square" style="color:' + this.dicepipcolor[1] + '"></i>';
+    xh += '<i class="diceface" style="color:'+ this.turncolor[1] +'"></i></span>';
+    xh += '<span id="dice11" class="dice fa-layers fa-fw">';
+    xh += '<i class="fas fa-square" style="color:' + this.dicepipcolor[1] + '"></i>';
+    xh += '<i class="diceface" style="color:'+ this.turncolor[1] +'"></i></span>';
+    xh += '<span id="dice20" class="dice fa-layers fa-fw">';
+    xh += '<i class="fas fa-square" style="color:' + this.dicepipcolor[2] + '"></i>';
+    xh += '<i class="diceface" style="color:'+ this.turncolor[2] +'"></i></span>';
+    xh += '<span id="dice21" class="dice fa-layers fa-fw">';
+    xh += '<i class="fas fa-square" style="color:' + this.dicepipcolor[2] + '"></i>';
+    xh += '<i class="diceface" style="color:'+ this.turncolor[2] +'"></i></span>';
     // label
     for (i = 1; i < 25; i++) {
       k = 'lb' + i;
@@ -63,7 +71,7 @@ class BgBoard {
         k = 'p' + this.playcols[j] + i;
         xh += '<span id="' + k + '" class="chequer fa-layers fa-fw">';
         xh += '<i class="fas fa-circle" style="color:gray"></i>';
-        xh += '<i class="fas fa-circle '+ this.turncolor[j] +'" data-fa-transform="shrink-1"></i></span>';
+        xh += '<i class="fas fa-circle" style="color:'+ this.turncolor[j] +'" data-fa-transform="shrink-1"></i></span>';
       }
     }
 
@@ -73,10 +81,10 @@ class BgBoard {
   applyDomStyle() {
     this.mainBoard.width(this.boardWidth).height(this.boardHeight);
     this.cubeDisp.width(this.cubeSize).height(this.cubeSize).css({left: this.cubeX, top: this.cubeY[0]});
-    this.diceimgs[1][0].css({left: this.dice1x, top: this.dicey});
-    this.diceimgs[1][1].css({left: (this.dice1x + 1.6 * this.diceSize), top: this.dicey});
-    this.diceimgs[2][0].css({left: this.dice2x, top: this.dicey});
-    this.diceimgs[2][1].css({left: (this.dice2x + 1.6 * this.diceSize), top: this.dicey});
+    this.diceimgs[1][0].css({left: this.dice10x, top: this.dicey});
+    this.diceimgs[1][1].css({left: this.dice11x, top: this.dicey});
+    this.diceimgs[2][0].css({left: this.dice20x, top: this.dicey});
+    this.diceimgs[2][1].css({left: this.dice21x, top: this.dicey});
 
     for (let i = 1; i < 25; i++) {
       let ey = (i > 12) ? this.upperlabelY : this.lowerlabelY;
@@ -129,7 +137,6 @@ class BgBoard {
 
   showBoard2(xg) { // input for XGID object
     this.xgidstr = xg.xgidstr;
-//console.log("showBoard()", xg.xgidstr);
     if (xg.get_boff(0) < 0 || xg.get_boff(1) < 0) {
       alert("Invalid XGID!!\n" + xg.xgidstr + "\nbearoff(0)=" + xg.get_boff(0) + "\nbearoff(1)=" + xg.get_boff(1));
     }
@@ -164,10 +171,11 @@ class BgBoard {
   showDice(turn, d0, d1) {
     const dicepip = {0:"fa-square", 1:"fa-dice-one", 2:"fa-dice-two", 3:"fa-dice-three",
                      4:"fa-dice-four", 5:"fa-dice-five", 6:"fa-dice-six"};
-    this.diceimgs[turn][0].removeClass().addClass("fas dice").addClass(dicepip[d0]).addClass(this.turncolor[turn]).show();
-    if (d0 == 0) { this.diceimgs[turn][0].hide(); }
-    this.diceimgs[turn][1].removeClass().addClass("fas dice").addClass(dicepip[d1]).addClass(this.turncolor[turn]).show();
-    if (d1 == 0) { this.diceimgs[turn][1].hide(); }
+    const diceclasses = "fa-dice-one fa-dice-two fa-dice-three fa-dice-four fa-dice-five fa-dice-six";
+    this.diceimgs[turn][0].children(".diceface").removeClass(diceclasses).addClass("fas").addClass(dicepip[d0]);
+    this.diceimgs[turn][1].children(".diceface").removeClass(diceclasses).addClass("fas").addClass(dicepip[d1]);
+    (d0 == 0) ? this.diceimgs[turn][0].hide() : this.diceimgs[turn][0].show();
+    (d1 == 0) ? this.diceimgs[turn][1].hide() : this.diceimgs[turn][1].show();
   }
 
   showLabels(turn) {
@@ -222,7 +230,6 @@ class BgBoard {
   }
 
   animateChequer(xg, frpt, topt, delay, n) {
-//console.log("animateChequer", frpt, topt);
     const player = BgUtil.cvtTurnXg2kv(xg.turn);
     const frabs = (player == 2) ? frpt : 25 - frpt;
     let toabs;
@@ -234,7 +241,6 @@ class BgBoard {
     const p2move = this.toPointArray[frabs].pop();
     const topos = this.calcAftPosition(xg, toabs);
     this.toPointArray[toabs].push(p2move);
-//console.log("animateChequer", player, frabs, toabs, p2move, topos);
     const duration = (topt == 25) ? delay/2 : delay;
     const promise = p2move.css({"z-index": 20 + n}).animate({left: topos[0], top: topos[1]}, duration).promise();
     if (topos[2] != "") {
@@ -253,7 +259,6 @@ class BgBoard {
       ex = this.pointx[26];
       ey = this.offYpos[player] + (15 - num - 2) * this.boffHeight; // -2 is draw offset
       st = "";
-//console.log("calcAftPosition-bearoff", ex, ey, this.offYpos[player] , num , this.boffHeight);
     } else if (pt == 0 || pt == 25) { //on the bar
       ty = (num > this.barstackthreshold) ? this.barstackthreshold : num;
       ey = this.barYpos[oppo] + (ty * this.pieceHeight);
@@ -272,48 +277,47 @@ class BgBoard {
     this.boardWidth = 540;
     this.boardHeight = 410;
     this.boardFrame = 15;
-    this.pieceWidth = 30;
+    this.pieceWidth = 30; // equal to width in css
     this.pieceHeight = this.pieceWidth;
     this.boffHeight = 11; // bear off chequer height
 
-    this.points = [];
-    // This array contains the x-coordinates of the points on the board.
-    // Point 0 is the off tray, point 25 is the bar.
-    // On-board points (second element onwards) start from lower left and work anti-clockwise
-    // Default layout is top-left
     this.pointx = [255, 60, 90, 120, 150, 180, 210, 300, 330, 360, 390, 420, 450,
-                   450, 420, 390, 360, 330, 300, 210, 180, 150, 120, 90, 60, 255, 13]; //★
-    this.leftSideOff = this.boardFrame; // Off tray x coord (right)
-    this.rightSideOff = this.boardWidth - this.pieceWidth - this.boardFrame; // Off tray x coord (left)
+                   450, 420, 390, 360, 330, 300, 210, 180, 150, 120, 90, 60, 255, 13];
+    this.leftSideOff = this.boardFrame; // Off tray x coord (left)
+    this.rightSideOff = this.boardWidth - this.pieceWidth - this.boardFrame; // Off tray x coord (right)
 
-    this.yupper = this.boardFrame; // ==board frame size
+    this.yupper = this.boardFrame;
     this.ylower = this.boardHeight - this.pieceHeight - this.boardFrame;
 
     this.uppertrayY = 10; // Y coord of upper off side tray
     this.lowertrayY = this.boardHeight / 2 + this.uppertrayY;
     this.offYpos = [null, this.uppertrayY, this.lowertrayY];
-    this.stackinfocolor = ["gray", "black", "white"]; // color code name
-    this.turncolor = ["", "chequerW", "chequerB"]; // css class name
 
-    this.diceSize = 35; // need to rendou with css
-    this.dicey = Math.round((this.boardHeight / 2) - (this.diceSize / 2)); // dice y coord
-    this.dice1x = Math.round(this.pieceWidth * 3 - 1.3 * this.diceSize +  60);
-    this.dice2x = Math.round(this.pieceWidth * 3 - 1.3 * this.diceSize + 300);
+    this.stackinfocolor = ["gray", "black", "white"]; // color code name
+    this.dicepipcolor = ["", "black", "white"]; // color code name
+    this.turncolor = ["", "white", "chocolate"]; // color code name
+
+    this.diceSize = 35; // equal to width in css
+    this.dicey = Math.round(this.boardHeight / 2 - this.diceSize / 2); // dice y coord
+    this.dice10x = Math.round(this.pieceWidth * 3 - 1.3 * this.diceSize +  60);
+    this.dice11x = Math.round(this.dice10x + 1.6 * this.diceSize);
+    this.dice20x = Math.round(this.pieceWidth * 3 - 1.3 * this.diceSize + 300);
+    this.dice21x = Math.round(this.dice20x + 1.6 * this.diceSize);
     this.upperlabelY = 0;
     this.lowerlabelY = this.boardHeight - this.boardFrame;
 
     this.pointstackthreshold = 4; // Max pieces per layer on a point (+1)
     this.barstackthreshold = 3; // Max pieces per layer on the bar (+1)
 
-    this.cubeSize = 40;
-    this.cubeX = Math.round((this.boardWidth / 2) - (this.cubeSize / 2));
+    this.cubeSize = 40; // equal to width in css
+    this.cubeX = Math.round(this.boardWidth / 2 - this.cubeSize / 2);
     this.cubeY = [,,];
-    this.cubeY[0] = Math.round((this.boardHeight / 2) - (this.cubeSize / 2));
+    this.cubeY[0] = Math.round(this.boardHeight / 2 - this.cubeSize / 2);
     this.cubeY[1] = this.yupper + 1;
     this.cubeY[2] = this.ylower - 1;
 
     this.bar1ypos = this.cubeY[1] + this.cubeSize + 2;
-    this.bar2ypos = this.boardHeight - (this.cubeSize) - (this.pieceHeight * 4) - 10;
+    this.bar2ypos = this.boardHeight - this.cubeSize - this.pieceHeight * 4 - 10;
     this.barYpos = [null, this.bar1ypos, this.bar2ypos];
   }
 
