@@ -251,14 +251,14 @@ class BgGame {
     //読込終了後の処理
     reader.onload = () => { //アロー関数で記述すれば、thisがそのまま使える
       this.gamesource.val(reader.result); //テキストエリアに表示
-      this.setControllerProp("gameload");
+      this.getGameSource();
     }
   }
 
   //AJAXで、棋譜ファイルを取得
   //サーバ内ローカル、インターネットURLの両方に対応
   loadInetKifuAjax(query) {
-console.log("loadInetKifuAjax", query);
+//console.log("loadInetKifuAjax", query);
 
     $.ajax({
       url: 'bg_kifu_ajax.php'+query,
@@ -289,7 +289,7 @@ console.log("loadInetKifuAjax", query);
       if (!BgUtil.isContain(d, "ERROR")) {
         this.kifuDnDArea.text(file);
         this.gamesource.val(d);
-        this.setControllerProp("gameload");
+        this.getGameSource();
       } else {
         alert('ERROR in return data:\n' + d);
       }
@@ -605,9 +605,12 @@ console.log("get_gnuanalysis_ajax");
   }
 
   async analyseByGnubg() {
-console.log("analyse_gnubg");
+//console.log("analyse_gnubg");
     const playo = this.playObject[this.curRollNo -1];
-    const xgid = playo.bfxgid;
+    let xgid = "XGID=-b----E-C---eE---c-e----B-:0:0:1:00:0:0:0:0:10";
+    if (playo !== void 0) { // playo is not 'undefined'
+        xgid = playo.bfxgid;
+    }
     let xgidcube = xgid;
     const xg = new Xgid(xgid);
     let chequeractionflg = false, analychequer, analycube;
@@ -622,8 +625,8 @@ console.log("analyse_gnubg");
     //analyse cube action
     analycube = await this.get_gnuanalysis_ajax(xgidcube).catch(() => 'ERROR in AJAX connection\n');
 
-    let pre = "----------------------------------------------------------------------------------\n";
-    pre += xgid + "\n";
+    let pre = xgid + "\n";
+    pre += "----------------------------------------------------------------------------------\n";
     if (chequeractionflg) {
       pre += analychequer;
       pre += "----------------------------------------------------------------------------------\n";
@@ -657,6 +660,9 @@ console.log("analyse_gnubg");
       this.loadInetKifuAjax(query);
     });
     this.analyseBtn.on('click', () => {
+      alert('Sorry, this feature is inactive.'); //gnubgによる解析機能は営業停止中
+      return;
+
       this.analyseByGnubg();
       $('#analysisResult > .modalContents').css("max-width", "none");
       $('#analysisResult').fadeIn();
