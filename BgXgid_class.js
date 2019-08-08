@@ -171,7 +171,7 @@ class Xgid {
     const move = BgUtil.reformMoveStr(pos, mov, turn); // apply for Dubrovnik_SJP.txt format
     const oppo = (-1) * turn;
     let posary = pos.split("");
-    for (let mv of BgUtil.cleanupMoveStr(move)) {
+    for (let mv of BgUtil.cleanupMoveStr(move, this._xgid)) {
       frto = mv.split("/");
       fr = parseInt(frto[0]); fpt = (turn == 1) ? fr : 25 - fr;
       to = parseInt(frto[1]); tpt = (turn == 1) ? to : 25 - to; bar = (turn == 1) ? 0 : 25;
@@ -187,6 +187,11 @@ class Xgid {
       }
     }
     return posary.join("");
+  }
+
+  isBlocked(pt) {
+    pt = (this._turn == 1) ? pt : 25 - pt;
+    return (this._ptno[pt] >= 2 && this._ptcol[pt] != this._turn);
   }
 
 } //class Xgid

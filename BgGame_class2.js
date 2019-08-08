@@ -214,7 +214,7 @@ class BgGame {
     const move = playo.move;
 
     if (action == "roll" && BgUtil.isContain(move, "/")) {
-      const moveary = BgUtil.cleanupMoveStr(move);
+      const moveary = BgUtil.cleanupMoveStr(move, xgbf.xgidstr);
       for (let n = 0; n < moveary.length; n++) {
         this.moveDisp.html( BgUtil.makeMoveStr(moveary, n) );
         const fromto = moveary[n].split("/");
