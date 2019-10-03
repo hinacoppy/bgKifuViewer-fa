@@ -184,13 +184,25 @@ class BgUtil {
   }
 
   static reformMoveStr(pos, move, turn) {
-    return move;  // fix me
-// Mochy : 1                       Peter Raugust : 0
-//  1) 52: 24/22 13/8              63: 24/18 6/3
-//  2) 61: 25/24 13/7              62: 25/23 24/18
-//to
-//  1) 52: 24/22 13/8              63: 24/18 6/3*
-//  2) 61: 25/24 13/7*             62: 25/23 24/18
+    //ex.
+    //pos = ----bAE-C---cE-b-c-e----A-
+    //move= 21/20 20/14 (roll 61)
+    //turn= -1
+    //then return(move) 21/20* 20/14
+
+    let retmovestr = "";
+    let posary = pos.split("");
+    const moveary = move.trim().replace(/\s+/, " ").split(" ");
+    for (let mov of moveary) {
+      const frto = mov.split("/");
+      const pt = (turn == 1) ? frto[1] : 25 - frto[1];
+      retmovestr += " " + mov;
+      if ((posary[pt] == 'a' && turn == 1) || (posary[pt] == 'A' && turn == -1)) {
+         retmovestr += "*";
+         posary[pt] = "-";
+      }
+    }
+    return retmovestr;
   }
 
   static makeMoveStr(ary, n) {
