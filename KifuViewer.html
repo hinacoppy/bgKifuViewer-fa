@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta http-equiv="cache-control" content="no-cache">
 <meta name="description" content="Backgammon Kifu Viewer">
-<meta name="author" content="(C)hinacoppy 2018">
-<link rel="stylesheet" href="KifuViewer.css">
+<meta name="author" content="(C)hinacoppy 2018-2019">
+<link rel="stylesheet" href="css/KifuViewer.css">
+<link rel="stylesheet" href="css/font-awesome-animation.min.css">
 <title>BG Kifu Viewer</title>
 </head>
 
@@ -52,7 +53,7 @@ Select play:
 
 <p>Kifu from Local: <input type="file" id="localKifuFile"></p>
 <p id="dropzone" class="dropzone">Kifu file Drag and Drop Here</p>
-<!-- <p>Kifu from Internet: <input type="text" id="inetKifuURL"><button id="urldownload"><i class="fas fa-cloud-download-alt"></i></button></p> -->
+<p>Kifu from Internet: <input type="text" id="inetKifuURL"><button id="urldownload"><i class="fas fa-cloud-download-alt"></i></button></p>
 
 <p>
 <button id="gamestart" class="bigbutton"><i class="fas fa-paper-plane fa-2x"></i></button>&emsp;
@@ -84,12 +85,12 @@ Select play:
   </div>
 </section>
 
-<script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js" integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous" data-auto-replace-svg="nest"></script>
-<script src="jquery-3.3.1.min.js"></script>
-<script src="BgXgid_class.js"></script>
-<script src="BgBoard_class2.js"></script>
-<script src="BgGame_class2.js"></script>
-<script src="BgUtil_class.js"></script>
+<script defer src="js/fontawesome-all.min.js"></script>
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="js/BgXgid_class.js"></script>
+<script src="js/BgBoard_class2.js"></script>
+<script src="js/BgGame_class2.js"></script>
+<script src="js/BgUtil_class.js"></script>
 <script>
 myGame = new BgGame();
 </script>
