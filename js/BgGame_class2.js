@@ -191,7 +191,8 @@ class BgGame {
     this.analysisDisp.text("");
     if (this.animFlag.prop("checked") && this.goForward) {
       this.setControllerProp("animation");
-      await this.animMove(playnum);
+      await this.board.animateDice(1000); //ダイスを揺らし、揺れ終わるのを待つ(引数=msec)
+      await this.animMove(playnum); //チェッカーを動かし、動き終わるのを待つ
       this.setControllerProp(this.curControlProp);
     } else {
       this.afterMove(playnum)
@@ -267,7 +268,8 @@ class BgGame {
     }).done((d) => {
       if (!BgUtil.isContain(d, "ERROR")) {
         this.gamesource.val(d);
-        this.setControllerProp("gameload");
+        //this.setControllerProp("gameload");
+        this.getGameSource();
       } else {
         alert('ERROR in return data:\n' + d);
       }
@@ -660,8 +662,8 @@ console.log("get_gnuanalysis_ajax");
       this.loadInetKifuAjax(query);
     });
     this.analyseBtn.on('click', () => {
-      alert('Sorry, this feature is inactive.'); //gnubgによる解析機能は営業停止中
-      return;
+//      alert('Sorry, this feature is inactive.'); //gnubgによる解析機能は営業停止中
+//      return;
 
       this.analyseByGnubg();
       $('#analysisResult > .modalContents').css("max-width", "none");
@@ -672,8 +674,10 @@ console.log("get_gnuanalysis_ajax");
 
     // ページがロードされたときに、query情報があればAJAXで棋譜ファイルを取得する
     const query = $(location).attr('search');
-    if (query != "") {
+    if (query.startsWith('?s=')) {
       this.loadServerKifuAjax(query);
+    } else if (query.startsWith('?u=')) {
+      this.loadInetKifuAjax(query);
     }
 
     this.kifuDnDArea.on('dragenter', (evt) => {

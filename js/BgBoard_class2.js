@@ -146,10 +146,13 @@ class BgBoard {
     this.showLabels(xg.get_turn());
   }
 
-  showCube(pos, val, offer, crawford){
+  async showCube(pos, val, offer, crawford){
     const cubepos = BgUtil.cvtTurnXg2kv(pos);
     const cubeval = BgUtil.calcCubeDisp(val, crawford);
     this.cubeDisp.text(cubeval).css({"top":this.cubeY[cubepos]}).toggleClass("cubeoffer", offer);
+    if (offer) {
+      await this.animateCube(1000);
+    }
   }
 
   showDiceAll(turn, d1, d2) {
@@ -247,6 +250,38 @@ class BgBoard {
       this.stacks[toabs].text(topos[2]).css("color", this.stackinfocolor[player]);
     }
     return promise;
+  }
+
+  animateDice(msec) {
+    const animationclass = "faa-shake animated"; //ダイスを揺らすアニメーション
+    this.diceimgs[1][0].addClass(animationclass);
+    this.diceimgs[1][1].addClass(animationclass);
+    this.diceimgs[2][0].addClass(animationclass); //見せないダイスも一緒に揺らす
+    this.diceimgs[2][1].addClass(animationclass);
+
+    const defer = $.Deferred(); //deferオブジェクトからpromiseを作る
+    setTimeout(() => { //1秒待ってアニメーションを止める
+      this.diceimgs[1][0].removeClass(animationclass);
+      this.diceimgs[1][1].removeClass(animationclass);
+      this.diceimgs[2][0].removeClass(animationclass);
+      this.diceimgs[2][1].removeClass(animationclass);
+      defer.resolve();
+    }, msec);
+
+    return defer.promise();
+  }
+
+  animateCube(msec) {
+    const animationclass = "faa-tada animated"; //キューブオファーのアニメーション
+    this.cubeDisp.addClass(animationclass);
+
+    const defer = $.Deferred(); //deferオブジェクトからpromiseを作る
+    setTimeout(() => { //1秒待ってアニメーションを止める
+      this.cubeDisp.removeClass(animationclass);
+      defer.resolve();
+    }, msec);
+
+    return defer.promise();
   }
 
   calcAftPosition(xg, pt) {
