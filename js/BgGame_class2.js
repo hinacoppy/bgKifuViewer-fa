@@ -281,7 +281,7 @@ class BgGame {
   //サーバ内の棋譜をロード
   loadServerKifuAjax(query) {
     const file = query.substr("?s=".length);
-    const filepath = "/bgKifuViewer/scripts/" + file;
+    const filepath = "/bgKifuViewer-fa/scripts/" + file;
 //console.log("loadServerKifuAjax", query, filepath);
     $.ajax({
       url: filepath,
