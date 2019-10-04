@@ -2,19 +2,348 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="description" content="Backgammon Kifu Viewer">
+<meta name="author" content="(C)hinacoppy 2019">
+<style>
+a{
+  text-decoration: none;
+}
+td{
+  padding: 1px 10px;
+}
+</style>
 <title>BG Kifu Viewer</title>
 </head>
 <body>
-<h2>Kifu Viewer Menu</h2>
+<h2>KifuViewer</h2>
+
 <ul>
-<li><a href="KifuViewer.html">KifuViewer.html</a>
-<li><a href="KifuViewer.html?s=chibao-1.txt">chibao-1.txt</a>
-<li><a href="KifuViewer.html?s=chibao-2.txt">chibao-2.txt</a>
+<li><a href="KifuViewer.html">KifuViewer.html</a> (棋譜データを参照せずに起動)
+<li><a href="#1">海外の大会の棋譜</a> (from JBL棋譜鑑賞室)
+<li><a href="#2">国内の大会の棋譜</a> (from JBL棋譜鑑賞室)
+<li><a href="#3">BG Blitz vs GNU Backgammon</a> (from Paul's Backgammon Vaults)
+<li><a href="#4">Matches from the Norges Backgammonforbund</a> (from Paul's Backgammon Vaults)
+<li><a href="#5">このサーバに置いてある棋譜</a> (テスト用)
+<li><a href="/">Return to Home</a>
+</ul>
+<hr>
+
+<h3 id="1">海外の大会の棋譜 <a href="http://www.backgammon.gr.jp/learning/grplayer/">(JBL棋譜鑑賞室)</a></h3>
+<ul>
+<li>Dennis Carlston vs. John O'Hagan, World Championship final, 2005
+    &emsp;<a href="KifuViewer.html?s=jbl/2005WCFINAL.txt">Viewer</a>
+<li>Francois TARDIEU vs. 金子真一郎, Nordic Open, 2005
+    &emsp;<a href="KifuViewer.html?s=jbl/2005_FT_Kaneko_NCQF.txt">Viewer</a>
+<li>金子真一郎 vs. Morten Holm, Nordic Open, 2005
+    &emsp;<a href="KifuViewer.html?s=jbl/holmvskaneko.txt">Viewer</a>
+<li>金子真一郎 vs. Paul Magriel, Super Jackpot semifinal, Canne 2004
+    &emsp;<a href="KifuViewer.html?s=jbl/CanneSuperJP_SemifinX22_simple.txt">Viewer</a>
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/CanneSuperJP_SemifinX22.txt">Text</a>
+<li>金子真一郎 vs. Falafel, Canne 2004
+    &emsp;<a href="KifuViewer.html?s=jbl/FalafelvsKaneko_simple.txt">Viewer</a>
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/FalafelvsKaneko.txt">Text</a>
+<li>望月正行 vs. 矢澤広伸, Las Vegas Open final 2003
+    &emsp;<a href="KifuViewer.html?s=jbl/lasvegasfinal2003s.txt">Viewer</a>
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/lasvegas2003final.txt">Text</a>
+<li>竹内慶人 vs. 三島泰夫, Las Vegas Open Intermediate final 2003
+    &emsp;<a href="KifuViewer.html?s=jbl/lasvegasinterfinal2003s.txt">Viewer</a>
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/lasvegasinterfinal2003.txt">Text</a>
+<li>Joergen Granstedt vs. Mario Kuehl, World Championship semi-final 2001
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/GranstedtKuehlMonteCarlo2001.txt">Text</a>
+<li>Joergen Granstedt vs. Thomas Holm, World Championship final 2001
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/GranstedtHolmMonteCarlo2001.txt">Text</a>
+<li>Katie Scalamandre vs. Thomas Holm, World Championship final 2000
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/ScalamandreHolmMonteCarlo2000.txt">Text</a>
+<li>Nack Ballard vs. Michael Meyburg, Nordic Open Superjackpot final 1999
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/MeyburgBallardCopenhagen99.txt">Text</a>
+</ul>
+<hr>
+
+<h3 id="2">国内の大会の棋譜 <a href="http://www.backgammon.gr.jp/learning/grplayer/">(JBL棋譜鑑賞室)</a></h3>
+<ul>
+<li>西村詩 vs. 下平憲治, 日本選手権 決勝, 2013
+    &emsp;<a href="KifuViewer.html?s=jbl/JapanOpenFinal2013.mat">Viewer</a>
+<li>下平憲治 vs. 矢澤亜希子, 日本選手権 決勝, 2012
+    &emsp;<a href="KifuViewer.html?s=jbl/Kenji_Shimodaira-Akiko_Yazawa_17pts_2012-10-08.mat">Viewer</a>
+<li>田中達也 vs. 片上大輔, 盤聖戦 決勝, 2012
+    &emsp;<a href="KifuViewer.html?s=jbl/Daisuke_Katagami-Tatsuya_Tanaka_20120205_1.mat">第一セット(viewer)</a>,
+    &emsp;<a href="KifuViewer.html?s=jbl/Daisuke_Katagami-Tatsuya_Tanaka_20120205_2.mat">第二セット</a>,
+    &emsp;<a href="KifuViewer.html?s=jbl/Daisuke_Katagami-Tatsuya_Tanaka_20120205_3.mat">第三セット</a>
+<li>下平憲治 vs. 中村慶行, 名人戦 決勝, 2011
+    &emsp;<a href="KifuViewer.html?s=jbl/Kenji_Shimodaira-Yoshiyuki_Nakamura_25_point_match_2011-06-26.mat">Viewer</a>
+<li>下平憲治 vs. 矢澤広伸, 盤聖戦 決勝, 2010
+    &emsp;<a href="KifuViewer.html?s=jbl/shimohei-yazawa_11p_2010-12-19.mat">第一セット(viewer)</a>,
+    &emsp;<a href="KifuViewer.html?s=jbl/shimohei-yazawa_11p_2010-12-19-2.mat">第二セット</a>,
+    &emsp;<a href="KifuViewer.html?s=jbl/shimohei-yazawa_11p_2010-12-19-3.mat">第三セット</a>
+<li>下平憲治 vs. 鈴木琢光, 日本選手権 決勝, 2010
+    &emsp;<a href="KifuViewer.html?s=jbl/2010JapanOpenFinal1.mat">第一セット(viewer)</a>,
+    &emsp;<a href="KifuViewer.html?s=jbl/2010JapanOpenFinal2.mat">第二セット</a>
+<li>景山充人 vs. 梅津陽一郎, 日本選手権コンソレーション 決勝, 2010
+    &emsp;<a href="KifuViewer.html?s=jbl/2010JapanOpenConsolationFinal.txt">Viewer</a>
+<li>矢澤亜希子 vs. 景山充人, 盤聖戦 決勝, 2009
+    &emsp;<a href="KifuViewer.html?s=jbl/YazawaAkiko_KageyamaMichihito_11_100111_1st.txt">第一セット(viewer)</a>,
+    &emsp;<a href="KifuViewer.html?s=jbl/YazawaAkiko_KageyamaMichihito_11_100111_2nd.txt">第二セット</a>,
+    &emsp;<a href="KifuViewer.html?s=jbl/YazawaAkiko_KageyamaMichihito_11_100111_3rd.txt">第三セット</a>
+<li>望月正行 vs. 中村幸男, 名人戦 決勝, 2008
+    &emsp;<a href="KifuViewer.html?s=jbl/MochizukiMasayuki_NakamuraYukio_25p_090628.txt">Viewer</a>
+<li>西川清一 vs. 中村順子, 盤聖戦 決勝, 2007
+    &emsp;<a href="KifuViewer.html?s=jbl/Bansei2007Final_fiarytails_luu1423_1.txt">第一セット(viewer)</a>,
+    &emsp;<a href="KifuViewer.html?s=jbl/Bansei2007Final_fiarytails_luu1423_2.txt">第二セット</a>
+<li>阿部亜希子 vs. 寺尾俊治, 王位戦 決勝, 2007
+    &emsp;<a href="KifuViewer.html?s=jbl/2007KingFinal01.txt">第一セット(viewer)</a>,
+    &emsp;<a href="KifuViewer.html?s=jbl/2007KingFinal02.txt">第二セット</a>
+<li>田中達也 vs. 光吉知也, ジャパンオープン 決勝, 2007
+    &emsp;<a href="KifuViewer.html?s=jbl/JapanOpen2007Final.txt">Viewer</a>
+<li>中村順子 vs. 高橋洋介, 日本選手権本戦 決勝, 2007
+    &emsp;<a href="KifuViewer.html?s=jbl/Championship2007.txt">Viewer</a>
+<li>金子真一郎 vs. 那須雅彦, 盤聖戦 決勝, 2006
+    &emsp;<a href="KifuViewer.html?s=jbl/2006BanseiFinal_Kaneko_Nasu_1.txt">第一セット(viewer)</a>,
+    &emsp;<a href="KifuViewer.html?s=jbl/2006BanseiFinal_Kaneko_Nasu_2.txt">第二セット</a>,
+    &emsp;<a href="KifuViewer.html?s=jbl/2006BanseiFinal_Kaneko_Nasu_3.txt">第三セット</a>
+<li>武宮正樹 vs. 阿部亜希子, 盤聖戦 決勝, 2005
+    &emsp;<a href="KifuViewer.html?s=jbl/2005BanseiFinal_Akiko_Takemiya_1.txt">第一セット(viewer)</a>,
+    &emsp;<a href="KifuViewer.html?s=jbl/2005BanseiFinal_Akiko_Takemiya_2.txt">第二セット</a>,
+    &emsp;<a href="KifuViewer.html?s=jbl/2005BanseiFinal_Akiko_Takemiya_3.txt">第三セット</a>
+<li>西川清一 vs. 山本潤, 名古屋オープン 決勝, 2005
+    &emsp;<a href="KifuViewer.html?s=jbl/2005NagoyaFinal.txt">Viewer</a>
+<li>景山充人 vs. 市川勝規, 名人戦 決勝, 2005
+    &emsp;<a href="KifuViewer.html?s=jbl/2005masterfinal.txt">Viewer</a>
+<li>片上大輔 vs. 高橋順, 王位戦 決勝, 2005
+    &emsp;<a href="KifuViewer.html?s=jbl/Katagami_Kodebu_2005King1st.txt">第一セット(viewer)</a>,
+    &emsp;<a href="KifuViewer.html?s=jbl/Katagami_Kodebu_2005King2nd.txt">第二セット</a>
+<li>永井一矢 vs. 西村詩, 大阪オープン 決勝, 2005
+    &emsp;<a href="KifuViewer.html?s=jbl/2005oosakafinal.txt">Viewer</a>
+<li>阿部亜希子 vs. 矢澤広伸, 盤聖戦 決勝, 2004
+    &emsp;<a href="KifuViewer.html?s=jbl/2004Bansei_1st_AbeVsYazawa.txt">第一セット(viewer)</a>,
+    &emsp;<a href="KifuViewer.html?s=jbl/2004Bansei_2nd_AbeVsYazawa.txt">第二セット</a>
+<li>市川勝規 vs. 手塚博久, 名人戦 決勝, 2004</a>
+    &emsp;<a href="KifuViewer.html?s=jbl/meijin04.txt">Viewer</a>
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/meijin04ban.txt">Text</a>
+<li>山本雅人 vs. 望月正行, 王位戦 決勝, 2004
+    &emsp;<a href="KifuViewer.html?s=jbl/king2004final1.txt">第一セット(viewer)</a>,
+    &emsp;<a href="KifuViewer.html?s=jbl/king2004final2.txt">第二セット</a>,
+    &emsp;<a href="KifuViewer.html?s=jbl/king2004final3.txt">第三セット</a>
+<li>西川清一 vs. 金子真一郎, 大阪オープン 準決勝, 2004
+    &emsp;<a href="KifuViewer.html?s=jbl/oosaka2004semis.txt">Viewer</a>
+<li>景山充人 vs. 山口昌宏, 盤聖戦 決勝 2003
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/Bansei2003_final_1.txt">第一セット(text)</a>,
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/Bansei2003_final_2.txt">第二セット</a>,
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/Bansei2003_final_3.txt">第三セット</a>
+<li>景山充人 vs. 竹内慶人, 名古屋オープン 決勝 2003
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/nagoya2003final.txt">Text</a>
+<li>西川清一 vs. Frank Talbot, ジャパンオープン 決勝 2002
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/Philia-FrankTalbots2002.txt">Text</a>
+<li>Jake Jacobs vs. Thomas Meyer, スターオンラインカップ 決勝 2002
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/final_of_star20021014s.txt">Text</a>
+<li>皆上強志 vs. 望月正行, 名人戦 決勝 2002
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/meijin02ban.txt">Text</a>
+<li>皆上強志 vs. 景山充人, 名人戦 準決勝 2002
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/kageyama-minack2002semifinal.txt">Text</a>
+<li>皆上強志 vs. 望月正行, 名人戦 決勝 2001
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/meijin01ban.txt">Text</a>
+<li>景山充人 vs. 永井誠一, 盤聖戦 決勝, 2001
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/Bansei2001_Nagai_001.txt">第一セット(text)</a>,
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/Bansei2001_Nagai_002.txt">第二セット</a>,
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/Bansei2001_Nagai_003.txt">第三セット</a>
+<li>景山充人 vs. 鷹觜勝之, 最上カップ 決勝 2001
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/michy-sptaka-mogami-final-15pt.txt">Text</a>
+<li>長谷川俊介 vs. Nack Ballard, 最上カップ 決勝 2000
+    &emsp;<a href="http://www.backgammon.gr.jp/learning/grplayer/GameData/Mogami2000ban.txt">Text</a>
+</ul>
+<hr>
+
+<h3 id="3">BG Blitz vs GNU Backgammon <a href="https://www.paulspages.co.uk/bgvaults/gvbdl/index.php">(Paul's Backgammon Vaults)</a></h3>
+
+<table border="1" bordercolor="gray" cellpadding="3" cellspacing="0" style="border-collapse: collapse">
+<tr>
+<td><a href="KifuViewer.html?s=gnuvsbliz/002-gnubg-BGBlitz%207-pt%2017%20(gnubg).mat">002-gnubg-BGBlitz 7-pt 17 (gnubg).mat</a>
+<td><a href="KifuViewer.html?s=gnuvsbliz/002-gnubg-BGBlitz%207-pt%208%20(BGBlitz).mat">002-gnubg-BGBlitz 7-pt 8 (BGBlitz).mat</a>
+<td><a href="KifuViewer.html?s=gnuvsbliz/002-gnubg-BGBlitz%207-pt%202%20(gnubg).mat">002-gnubg-BGBlitz 7-pt 2 (gnubg).mat</a>
+</tr><tr>
+<td><a href="KifuViewer.html?s=gnuvsbliz/002-gnubg-BGBlitz%207-pt%201%20(gnubg).mat">002-gnubg-BGBlitz 7-pt 1 (gnubg).mat</a>
+<td><a href="KifuViewer.html?s=gnuvsbliz/002-gnubg-BGBlitz%207-pt%2013%20(BGBlitz).mat">002-gnubg-BGBlitz 7-pt 13 (BGBlitz).mat</a>
+<td><a href="KifuViewer.html?s=gnuvsbliz/001-gnubg-BGBlitz%203-pt%203%20(gnubg).mat">001-gnubg-BGBlitz 3-pt 3 (gnubg).mat</a>
+</tr><tr>
+<td><a href="KifuViewer.html?s=gnuvsbliz/002-gnubg-BGBlitz%207-pt%2016%20(gnubg).mat">002-gnubg-BGBlitz 7-pt 16 (gnubg).mat</a>
+<td><a href="KifuViewer.html?s=gnuvsbliz/001-gnubg-BGBlitz%203-pt%202%20(BGBlitz).mat">001-gnubg-BGBlitz 3-pt 2 (BGBlitz).mat</a>
+<td><a href="KifuViewer.html?s=gnuvsbliz/002-gnubg-BGBlitz%207-pt%209%20(gnubg).mat">002-gnubg-BGBlitz 7-pt 9 (gnubg).mat</a>
+</tr><tr>
+<td><a href="KifuViewer.html?s=gnuvsbliz/001-gnubg-BGBlitz%207-pt%201%20(gnubg).mat">001-gnubg-BGBlitz 7-pt 1 (gnubg).mat</a>
+<td><a href="KifuViewer.html?s=gnuvsbliz/002-gnubg-BGBlitz%207-pt%2011%20(BGBlitz).mat">002-gnubg-BGBlitz 7-pt 11 (BGBlitz).mat</a>
+<td><a href="KifuViewer.html?s=gnuvsbliz/002-gnubg-BGBlitz%207-pt%2010%20(gnubg).mat">002-gnubg-BGBlitz 7-pt 10 (gnubg).mat</a>
+</tr><tr>
+<td><a href="KifuViewer.html?s=gnuvsbliz/002-gnubg-BGBlitz%207-pt%2019%20(gnubg).mat">002-gnubg-BGBlitz 7-pt 19 (gnubg).mat</a>
+<td><a href="KifuViewer.html?s=gnuvsbliz/002-gnubg-BGBlitz%207-pt%2012%20(gnubg).mat">002-gnubg-BGBlitz 7-pt 12 (gnubg).mat</a>
+<td><a href="KifuViewer.html?s=gnuvsbliz/001-gnubg-BGBlitz%207-pt%203%20(gnubg).mat">001-gnubg-BGBlitz 7-pt 3 (gnubg).mat</a>
+</tr><tr>
+<td><a href="KifuViewer.html?s=gnuvsbliz/002-gnubg-BGBlitz%207-pt%2014%20(BGBlitz).mat">002-gnubg-BGBlitz 7-pt 14 (BGBlitz).mat</a>
+<td><a href="KifuViewer.html?s=gnuvsbliz/002-gnubg-BGBlitz%207-pt%2018%20(gnubg).mat">002-gnubg-BGBlitz 7-pt 18 (gnubg).mat</a>
+<td><a href="KifuViewer.html?s=gnuvsbliz/001-gnubg-BGBlitz%207-pt%202%20(BGBlitz).mat">001-gnubg-BGBlitz 7-pt 2 (BGBlitz).mat</a>
+</tr><tr>
+<td><a href="KifuViewer.html?s=gnuvsbliz/002-gnubg-BGBlitz%207-pt%203%20(BGBlitz).mat">002-gnubg-BGBlitz 7-pt 3 (BGBlitz).mat</a>
+<td><a href="KifuViewer.html?s=gnuvsbliz/002-gnubg-BGBlitz%207-pt%206%20(BGBlitz).mat">002-gnubg-BGBlitz 7-pt 6 (BGBlitz).mat</a>
+<td><a href="KifuViewer.html?s=gnuvsbliz/002-gnubg-BGBlitz%207-pt%207%20(gnubg).mat">002-gnubg-BGBlitz 7-pt 7 (gnubg).mat</a>
+</tr><tr>
+<td><a href="KifuViewer.html?s=gnuvsbliz/002-gnubg-BGBlitz%207-pt%2021%20(gnubg).mat">002-gnubg-BGBlitz 7-pt 21 (gnubg).mat</a>
+<td><a href="KifuViewer.html?s=gnuvsbliz/002-gnubg-BGBlitz%207-pt%204%20(BGBlitz).mat">002-gnubg-BGBlitz 7-pt 4 (BGBlitz).mat</a>
+<td><a href="KifuViewer.html?s=gnuvsbliz/001-gnubg-BGBlitz%203-pt%201%20(BGBlitz).mat">001-gnubg-BGBlitz 3-pt 1 (BGBlitz).mat</a>
+</tr><tr>
+<td><a href="KifuViewer.html?s=gnuvsbliz/002-gnubg-BGBlitz%207-pt%2020%20(gnubg).mat">002-gnubg-BGBlitz 7-pt 20 (gnubg).mat</a>
+<td><a href="KifuViewer.html?s=gnuvsbliz/002-gnubg-BGBlitz%207-pt%2015%20(gnubg).mat">002-gnubg-BGBlitz 7-pt 15 (gnubg).mat</a>
+<td><a href="KifuViewer.html?s=gnuvsbliz/002-gnubg-BGBlitz%207-pt%205%20(gnubg).mat">002-gnubg-BGBlitz 7-pt 5 (gnubg).mat</a>
+</tr>
+</table>
+<hr>
+
+<h3 id="4">Matches from the Norges Backgammonforbund <a href="https://www.paulspages.co.uk/bgvaults/nbgf/index.php">(Paul's Backgammon Vaults)</a></h3>
+
+<table border="1" bordercolor="gray" cellpadding="3" cellspacing="0" style="border-collapse: collapse">
+<tr>
+  <td width="360"><b>Tournament</b></td>
+  <td width="100"><b>Round</b></td>
+  <td width="350"><b>Players</b></td>
+  <td width="100"></td>
+</tr>
+<tr>
+  <td>Mestermĝte 2004</td>
+  <td>Final</td>
+  <td>Halvor Losnedal vs Odin Spillum Svendsen</td>
+  <td><a href="KifuViewer.html?s=nbgf/mm2005finale.mat">Viewer</a></td>
+</tr>
+<tr>
+  <td>Bodĝ Bymesterskap 2004</td>
+  <td>Final</td>
+  <td>Asbjĝrn Arntsen vs Ĝyvind Bjĝrkċs</td>
+  <td><a href="KifuViewer.html?s=nbgf/asa_bjr_bodoebyme.mat">Viewer</a></td>
+</tr>
+<tr>
+  <td>Swedish Open 2004</td>
+  <td>Final</td>
+  <td>Atle von der Fehr vs Michael Loefblad</td>
+  <td><a href="KifuViewer.html?s=nbgf/atle_lovet_so2004.mat">Viewer</a></td>
+</tr>
+<tr>
+  <td>Norgesmesterskapet 2004</td>
+  <td>Final</td>
+  <td>Sondre Rike vs Karl Frogner</td>
+  <td><a href="KifuViewer.html?s=nbgf/Sondre-Frogner Oppsamling N.mat">Viewer</a></td>
+</tr>
+<tr>
+  <td>Bergen Bymesterskap 2004</td>
+  <td>Semi Final</td>
+  <td>Jon Kristian vs Hans Liby </td>
+  <td><a href="KifuViewer.html?s=nbgf/royset_liby_bergenbyme2004.mat">Viewer</a></td>
+</tr>
+<tr>
+  <td>Superjackpot i Bergen Bymesterskap 2004</td>
+  <td>Final</td>
+  <td>Bjĝrn Inge Lorentzen vs Hans Liby</td>
+  <td><a href="KifuViewer.html?s=nbgf/BI-HansLiby-Superjackfinalemedanalyse.mat">Viewer</a></td>
+</tr>
+<tr>
+  <td>Abu Dhabi 2004</td>
+  <td>Final</td>
+  <td>Arild Idsĝ vs Andreas Humke (tyskland)</td>
+  <td><a href="KifuViewer.html?s=nbgf/idsoe_humke_abudhabi2004.mat">Viewer</a></td>
+</tr>
+<tr>
+  <td>Mestermĝte 2003</td>
+  <td>Final</td>
+  <td>Frank Stenersen vs Hans Liby</td>
+  <td><a href="KifuViewer.html?s=nbgf/stenersen_liby_mm2003.mat">Viewer</a></td>
+</tr>
+<tr>
+  <td>Norgesmesterskapet 2003</td>
+  <td>Final</td>
+  <td>Anders Skjelde vs Eirik Milch Pedersen</td>
+  <td><a href="KifuViewer.html?s=nbgf/skjelde_pedersen_nm2003.mat">Viewer</a></td>
+</tr>
+<tr>
+  <td>VM Monte Carlo 2003</td>
+  <td>Final</td>
+  <td>Jon Kristian Rĝyset vs Mosche Tissona</td>
+  <td><a href="KifuViewer.html?s=nbgf/royset_tissona_vm2003.mat">Viewer</a></td>
+</tr>
+<tr>
+  <td>VM Monte Carlo 2003</td>
+  <td>Semi Final</td>
+  <td>Jon Kristian Rĝyset vs Katja S. Svendsen</td>
+  <td><a href="KifuViewer.html?s=nbgf/royset_svendsen_vm2003.mat">Viewer</a></td>
+</tr>
+<tr>
+  <td>Norgesmesterskapet 2002</td>
+  <td>Final</td>
+  <td>Daniel Murphy vs Asbjĝrn Arntzen</td>
+  <td><a href="KifuViewer.html?s=nbgf/murphy_arntzen_nm2002.mat">Viewer</a></td>
+</tr>
+<tr>
+  <td>Norgesmesterskapet 2002</td>
+  <td>Semi Final</td>
+  <td>Daniel Murphy vs Audun Klubnes</td>
+  <td><a href="KifuViewer.html?s=nbgf/murphy_klubnes_nm2002.mat">Viewer</a></td>
+</tr>
+<tr>
+  <td>Oslo Open 2002</td>
+  <td>Final</td>
+  <td>Ray Tannen vs Victor M. Petersen</td>
+  <td><a href="KifuViewer.html?s=nbgf/tannen_petersen_oo2002.mat">Viewer</a></td>
+</tr>
+<tr>
+  <td>Artic Open 2002</td>
+  <td>Last 32</td>
+  <td>Eirik M. Johansen vs Jon Kristian Rĝyset</td>
+  <td><a href="KifuViewer.html?s=nbgf/johansen_royseth_ao2002.mat">Viewer</a></td>
+</tr>
+<tr>
+  <td>Oslo SuperJackpot 2002</td>
+  <td>Final</td>
+  <td>Magnar Naustdalslid vs Atle von der Fehr</td>
+  <td><a href="KifuViewer.html?s=nbgf/atle_magnar_jackpotfinale.mat">Viewer</a></td>
+</tr>
+<tr>
+  <td>Oslo SuperJackpot 2002</td>
+  <td>Semi Final</td>
+  <td>Atle von der Fehr vs Tore Eklund Fredriksen</td>
+  <td><a href="KifuViewer.html?s=nbgf/atle_tore_sc2002.mat">Viewer</a></td>
+</tr>
+<tr>
+  <td>Fedje Open 2002</td>
+  <td>Final</td>
+  <td>Jostein Flood vs Olav Otterlei</td>
+  <td><a href="KifuViewer.html?s=nbgf/flood_otterlei_fo2002.mat">Viewer</a></td>
+</tr>
+<tr>
+  <td>Mestermĝte 2001</td>
+  <td>Final</td>
+  <td>Jon Kristian Rĝyset vs Atle von der Vehr</td>
+  <td><a href="KifuViewer.html?s=nbgf/20020112_Royset_VonDerVehr_mm2001.mat">Viewer</a></td>
+</tr>
+<tr>
+  <td>Mestermĝte 2001</td>
+  <td>Semi Final</td>
+  <td>Arne Kristian Norhei vs Atle von der Vehr</td>
+  <td><a href="KifuViewer.html?s=nbgf/20020112_Nordhei_VonDerVehr_mm2001.mat">Viewer</a></td>
+</tr>
+<tr>
+  <td>Norgesmesterskapet 2001</td>
+  <td>Final</td>
+  <td>Halvor Losnedal vs Svein Dybvik</td>
+  <td><a href="KifuViewer.html?s=nbgf/dybvik_losnedal_nm2002.mat">Viewer</a></td>
+</tr>
+</table>
+<hr>
+
+<h3 id="5">このサーバに置いてある棋譜(テスト用)</h3>
+<ul>
+<li><a href="KifuViewer.html?s=chiba-o/chibao-1.txt">chibao-1.txt</a>
+<li><a href="KifuViewer.html?s=chiba-o/chibao-2.txt">chibao-2.txt</a>
 <li><a href="KifuViewer.html?s=002-gnubg-BGBlitz-1.txt">002-gnubg-BGBlitz-1</a>
 <li><a href="KifuViewer.html?s=002-gnubg-BGBlitz-2.txt">002-gnubg-BGBlitz-2</a>
 <li><a href="KifuViewer.html?s=TomAndJerry.txt">Tom and Jerry</a>
+<li><a href="KifuViewer.html?s=nbgf/mm2005finale.mat">Pauls NBGT</a>
 <!-- <li><a href="KifuViewer.html?s=Dubrovnik_SJP.txt">Dubrovnik_SJP.txt</a> -->
 </ul>
-<p><a href="/">Return to Home</a></p>
+<hr>
+
 </body>
 </html>
