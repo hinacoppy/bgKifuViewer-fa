@@ -409,7 +409,7 @@ class BgGame {
     }
 
     const playernameline = gamesourceArray[gamenumberline + 1];
-    const ary = BgUtil.insertStr(playernameline, 33, ":").split(":");
+    const ary = BgUtil.insertStr(playernameline, 32, ":").split(":");
     const playername1  = ary[2].trim();
     const playername2  = ary[0].trim();
 
@@ -422,7 +422,7 @@ class BgGame {
     const gameObj = gamesourceArray.slice(this.gameLines[gameNo-1], this.gameLines[gameNo]);
 
     const playernameline = gameObj[1]; // Contains player names and score
-    const ary = BgUtil.insertStr(playernameline, 33, ":").split(":");
+    const ary = BgUtil.insertStr(playernameline, 32, ":").split(":");
     const scr1 = ary[3].trim();
     const scr2 = ary[1].trim();
     this.curGameScore = scr2 + " - " + scr1;
