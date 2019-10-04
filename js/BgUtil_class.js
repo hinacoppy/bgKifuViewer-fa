@@ -68,7 +68,7 @@ class BgUtil {
     if (res !== null) {
       let p = res[1];
       for (let k = 0; k < parseInt(res[2]); k++) {
-        if (k > 0) { p = p.replace("*", ""); } //2�ڈȍ~�ł̓q�b�g�ł��Ȃ�
+        if (k > 0) { p = p.replace("*", ""); } //2個目以降ではヒットできない
         ary.push(p);
       }
     }
@@ -190,14 +190,17 @@ class BgUtil {
     //turn= -1
     //then return(move) 21/20* 20/14
 
+    if (BgUtil.isContain(move, "*")) { return move; } // do nothing when hitting with *
+
     let retmovestr = "";
     let posary = pos.split("");
     const moveary = move.trim().replace(/\s+/, " ").split(" ");
     for (let mov of moveary) {
       const frto = mov.split("/");
-      const pt = (turn == 1) ? frto[1] : 25 - frto[1];
+      const to = frto[1];
+      const pt = (turn == 1) ? to : 25 - to;
       retmovestr += " " + mov;
-      if ((posary[pt] == 'a' && turn == 1) || (posary[pt] == 'A' && turn == -1)) {
+      if (to != 0 && ((posary[pt] == 'a' && turn == 1) || (posary[pt] == 'A' && turn == -1))) {
          retmovestr += "*";
          posary[pt] = "-";
       }
