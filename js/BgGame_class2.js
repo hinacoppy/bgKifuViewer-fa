@@ -282,7 +282,7 @@ class BgGame {
   loadServerKifuAjax(query) {
     const file = query.substr("?s=".length);
     const filepath = "/bgKifuViewer-fa/scripts/" + file;
-console.log("loadServerKifuAjax", query, filepath);
+//console.log("loadServerKifuAjax", query, filepath);
     $.ajax({
       url: filepath,
       method: 'GET',
