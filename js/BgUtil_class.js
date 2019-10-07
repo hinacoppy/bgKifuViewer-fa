@@ -143,6 +143,7 @@ class BgUtil {
     // "24/22*/18" to "24/22* 22/18" -> "22/25 24/22 22/18" (hitted)
 
     // append hit mark when without * hitting
+    const str = this.appendHitMark(movestr, xgid);
 
     // strip leading and trailing spaces
     // and reduce multiple embedded spaces to single space, e.g. "6/1      5/4" to "6/1 5/4"
