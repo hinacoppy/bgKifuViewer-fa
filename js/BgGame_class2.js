@@ -638,6 +638,10 @@ console.log("get_gnuanalysis_ajax");
     this.analysisDisp.text(pre);
   }
 
+  isGithub() {
+    const hostname = $(location).attr('host');
+    return BgUtil.isContain(hostname, "hinacoppy.github.io");
+  }
 
   setEventHandler() {
     // Event handler
@@ -657,14 +661,21 @@ console.log("get_gnuanalysis_ajax");
     });
 
     this.localKifuBtn.on('change', (evt) => { this.loadLocalKifu(evt); });
+
     this.internetKifuBtn.on('click', () => {
+      if (this.isGithub()) {
+        alert('Sorry, this feature is inactive.'); //githubで稼働しているときはInternet Kifu参照不可
+        return;
+      }
       const query = "?u=" + this.urlInputTag.val();
       this.loadInetKifuAjax(query);
     });
-    this.analyseBtn.on('click', () => {
-//      alert('Sorry, this feature is inactive.'); //gnubgによる解析機能は営業停止中
-//      return;
 
+    this.analyseBtn.on('click', () => {
+      if (this.isGithub()) {
+        alert('Sorry, this feature is inactive.'); //githubで稼働しているときはgnubgの解析機能は営業停止
+        return;
+      }
       this.analyseByGnubg();
       $('#analysisResult > .modalContents').css("max-width", "none");
       $('#analysisResult').fadeIn();
