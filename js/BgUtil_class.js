@@ -134,13 +134,15 @@ class BgUtil {
     return ary;
   }
 
-  static cleanupMoveStr(str, xgid) {
+  static cleanupMoveStr(movestr, xgid) {
     // This function takes a move string (e.g. "24/18 18/8") and converts special GNU and other
     // constructs to plain moves, e.g.:
     // "6/off" to "6/0"
     // "bar/23" to "25/23"
     // "24/22(2)" to "24/22 24/22"
     // "24/22*/18" to "24/22* 22/18" -> "22/25 24/22 22/18" (hitted)
+
+    // append hit mark when without * hitting
 
     // strip leading and trailing spaces
     // and reduce multiple embedded spaces to single space, e.g. "6/1      5/4" to "6/1 5/4"
@@ -180,10 +182,17 @@ class BgUtil {
       }
     }
 
+    //pass4 Do BearIn before BearOff  eg. [2/0][7/6] to [7/6][2/0]
+    xsout3.sort((a, b) => {
+      let a_fr = a.split("/")[0];
+      let b_to = b.split("/")[1];
+      return (b_to == 0 && a_fr > 6) ? -1 : 0;
+    });
+
     return xsout3;
   }
 
-  static reformMoveStr(pos, move, turn) {
+  static appendHitMark(move, xgidstr) {
     //ex.
     //pos = ----bAE-C---cE-b-c-e----A-
     //move= 21/20 20/14 (roll 61)
@@ -192,12 +201,13 @@ class BgUtil {
 
     if (BgUtil.isContain(move, "*")) { return move; } // do nothing when hitting with *
 
+    const xgid = new Xgid(xgidstr);
+    const turn = xgid.turn;
+    let posary = xgid.position.split("");
     let retmovestr = "";
-    let posary = pos.split("");
     const moveary = move.trim().replace(/\s+/, " ").split(" ");
     for (let mov of moveary) {
-      const frto = mov.split("/");
-      const to = frto[1];
+      const to =  mov.split("/")[1];
       const pt = (turn == 1) ? to : 25 - to;
       retmovestr += " " + mov;
       if (to != 0 && ((posary[pt] == 'a' && turn == 1) || (posary[pt] == 'A' && turn == -1))) {

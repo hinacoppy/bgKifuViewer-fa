@@ -166,9 +166,8 @@ class Xgid {
     return (numaft == 0) ? "-" : String.fromCharCode(numaft + charcd - 1);
   }
 
-  moveChequer(pos, mov, turn) {
+  moveChequer(pos, move, turn) {
     let frto, fr, to, fpt, tpt, bar;
-    const move = BgUtil.reformMoveStr(pos, mov, turn); // apply for Dubrovnik_SJP.txt format
     const oppo = (-1) * turn;
     let posary = pos.split("");
     for (let mv of BgUtil.cleanupMoveStr(move, this._xgid)) {
