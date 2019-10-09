@@ -244,7 +244,7 @@ class BgGame {
   }
 
   readKifuFile(file) {
-    this.kifuDnDArea.text(file.name);
+    this.kifuDnDArea.text(this.inline_trim(file.name));
 
     const reader = new FileReader();
     reader.readAsText(file); //テキスト形式で読み込む
@@ -289,7 +289,7 @@ class BgGame {
       dataType: "text",
     }).done((d) => {
       if (!BgUtil.isContain(d, "ERROR")) {
-        this.kifuDnDArea.text(file);
+        this.kifuDnDArea.text(this.inline_trim(file));
         this.gamesource.val(d);
         this.getGameSource();
       } else {
@@ -641,6 +641,14 @@ console.log("get_gnuanalysis_ajax");
   isGithub() {
     const hostname = $(location).attr('host');
     return BgUtil.isContain(hostname, "hinacoppy.github.io");
+  }
+
+  inline_trim(str, len = 60) {
+    if (str.length < len) { return str; }
+    const len2 = Math.floor(len / 2);
+    const f = str.substr(0, len2);
+    const t = str.substr(-1 * len2);
+    return f + "..." + t;
   }
 
   setEventHandler() {
