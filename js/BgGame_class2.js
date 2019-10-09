@@ -643,7 +643,7 @@ console.log("get_gnuanalysis_ajax");
     return BgUtil.isContain(hostname, "hinacoppy.github.io");
   }
 
-  inline_trim(str, len = 60) {
+  inline_trim(str, len = 40) {
     if (str.length < len) { return str; }
     const len2 = Math.floor(len / 2);
     const f = str.substr(0, len2);
