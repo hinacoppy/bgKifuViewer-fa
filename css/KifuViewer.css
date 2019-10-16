@@ -44,6 +44,11 @@ body{
   margin: 1vh auto; /* 上寄せ、左右中央配置 */
 }
 
+.mainareaflex{
+  display: flex;
+  flex-direction: column; /* toggle column, column-reverse */
+}
+
 .nav{
   grid-area: nav;
   padding-left: 1vw;

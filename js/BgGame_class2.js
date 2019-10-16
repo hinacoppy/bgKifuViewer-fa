@@ -23,6 +23,7 @@ class BgGame {
     this.pageTitle = ""; //ex. Kenji Nishizawa vs Takeo Takizawa
     this.matchDescription = ""; //ex. "7 point match"
     this.curGameScore = ""; //ex. 0 - 2
+    this.topbottomFlag = true;
     this.xgidstr = "";
     this.crawford = false;
     this.board = new BgBoard();
@@ -62,6 +63,7 @@ class BgGame {
     this.nextGameBtn     = $("#nextGameBtn");
     this.goGameBtn       = $("#gameGoBtn");
     this.flipHorizBtn    = $("#flipHoriz");
+    this.flipVertBtn     = $("#flipVert");
     this.localKifuBtn    = $("#localKifuFile");
     this.internetKifuBtn = $("#urldownload");
     this.analyseBtn      = $("#analyse");
@@ -110,6 +112,13 @@ class BgGame {
 
   flipHorizOrientation() {
     this.board.flipHorizOrientation();
+  }
+
+  flipTopAndBottom() {
+    this.topbottomFlag = !this.topbottomFlag;
+    const direction = this.topbottomFlag ? 'column' : 'column-reverse';
+    $('.mainareaflex').css('flex-direction', direction);
+    this.board.flipTopAndBottom(this.topbottomFlag);
   }
 
   setAnimSpeed(spd) {
@@ -264,7 +273,7 @@ class BgGame {
     $.ajax({
       url: 'bg_kifu_ajax.php'+query,
       method: 'GET',
-      dataType: "text",
+      dataType: "text"
     }).done((d) => {
       if (!BgUtil.isContain(d, "ERROR")) {
         this.gamesource.val(d);
@@ -282,11 +291,11 @@ class BgGame {
   loadServerKifuAjax(query) {
     const file = query.substr("?s=".length);
     const filepath = "/bgKifuViewer-fa/scripts/" + file;
-//console.log("loadServerKifuAjax", query, filepath);
+console.log("loadServerKifuAjax", query, filepath);
     $.ajax({
       url: filepath,
       method: 'GET',
-      dataType: "text",
+      dataType: "text"
     }).done((d) => {
       if (!BgUtil.isContain(d, "ERROR")) {
         this.kifuDnDArea.text(this.inline_trim(file));
@@ -336,6 +345,7 @@ class BgGame {
       this.matchController.prop("disabled", true);
       this.speedController.prop("disabled", true);
       this.flipHorizBtn.prop("disabled", true);
+      this.flipVertBtn.prop("disabled", true);
       this.startBtn.prop("disabled", true);
       break;
     case "gameload":
@@ -345,6 +355,7 @@ class BgGame {
       break;
     case "manualplay":
       this.flipHorizBtn.prop("disabled", false);
+      this.flipVertBtn.prop("disabled", false);
       this.speedController.prop("disabled", false);
       this.gameController.prop("disabled", false);
       this.matchController.prop("disabled", false);
@@ -587,20 +598,24 @@ class BgGame {
 
 //AJAX通信により、gnubgによる解析結果を取得する
   async get_gnuanalysis_ajax(xgid) {
-console.log("get_gnuanalysis_ajax");
     const num=5, depth=2;
+    const hosturl = this.isHomePC() ? 'http://localhost/' : 'http://local.example.com/'; // home : office
+    const gnubgurl = hosturl+'gnubg_ajax.php?g='+xgid+'&d='+depth+'&n='+num; //local PHP script
+//      const gnubgurl =  'http://local.example.com/gnubg_ajax.php?g='+xgid+'&d='+depth+'&n='+num; //local PHP script
+//      const gnubgurl =  'http://local.example.com:1234/gnubg_ajax.js?g='+xgid; //Node.js
+//      const gnubgurl =  'http://ldap.example.com/cgi-bin/gnubg_ajax.cgi?g='+xgid+'&n='+num;
+//      const gnubgurl =  'http://local.example.com/cgi-bin/gnubg_ajax.cgi?g='+xgid+'&d='+depth+'&n='+num; //kagoya local
+//      const gnubgurl =  'https://v153-127-246-44.vir.kagoya.net:17500/gnubg_ajax.js?g='+xgid+'&d='+depth+'&n='+num; //Node.js
+//console.log("get_gnuanalysis_ajax",gnubgurl);
     this.analysisDisp.html('<i class="fas fa-spinner fa-pulse fa-3x" style="color:purple"></i>');
+
     // $.ajax return promise
     return $.ajax({
-      url: 'http://local.example.com/gnubg_ajax.php?g='+xgid+'&d='+depth+'&n='+num, //local PHP script
-//      url: 'http://local.example.com:1234/gnubg_ajax.js?g='+xgid, //Node.js
-//      url: 'http://ldap.example.com/cgi-bin/gnubg_ajax.cgi?g='+xgid+'&n='+num,
-//      url: 'http://local.example.com/cgi-bin/gnubg_ajax.cgi?g='+xgid+'&d='+depth+'&n='+num, //kagoya local
-//      url: 'https://v153-127-246-44.vir.kagoya.net:17500/gnubg_ajax.js?g='+xgid+'&d='+depth+'&n='+num, //Node.js
+      url: gnubgurl,
       method: 'GET',
-      dataType: "text",
+      dataType: 'text'
 //    }).done((d) => {
-//console.log("get_gnuanalysis_ajax-done". d);
+//console.log("get_gnuanalysis_ajax-done", d);
     }).fail(() => {
       alert('ERROR in AJAX connection');
     });
@@ -643,7 +658,12 @@ console.log("get_gnuanalysis_ajax");
     return BgUtil.isContain(hostname, "hinacoppy.github.io");
   }
 
-  inline_trim(str, len = 40) {
+  isHomePC() {
+    const hostname = $(location).attr('host');
+    return BgUtil.isContain(hostname, "localhost");
+  }
+
+  inline_trim(str, len = 60) {
     if (str.length < len) { return str; }
     const len2 = Math.floor(len / 2);
     const f = str.substr(0, len2);
@@ -663,6 +683,7 @@ console.log("get_gnuanalysis_ajax");
     this.goGameBtn.   on('click', () => { this.jumpToGame(); });
     this.startBtn.    on('click', () => { this.getGameSource(); });
     this.flipHorizBtn.on('click', () => { this.board.flipHorizOrientation(); /*this.flipHorizOrientation();*/ });
+    this.flipVertBtn .on('click', () => { this.flipTopAndBottom(); });
 
     this.speedController.on('change', () => {
       this.setAnimSpeed( this.animSpeed.filter(':checked').val() );

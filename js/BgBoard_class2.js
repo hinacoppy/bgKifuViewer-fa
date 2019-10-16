@@ -5,9 +5,10 @@ class BgBoard {
   constructor() {
     this.xgidstr = "XGID=--------------------------:0:0:0:00:0:0:0:0:0";
     this.bgBoardConfig();
-    this.horizOrientation = "L"; // L or R
     this.playcols = [" ", "w", "b"];
     this.toPointArray = new Array(28);
+    this.leftrightFlag = true; //true: Left bearoff, false: Right bearoff
+    this.topbottomFlag = true; //true: player2 is bottom, player1 is top
     this.boardimg = "./board.png";
     this.mainBoard = $('#mainboard'); //need to define before prepareBoard()
     this.prepareBoard();
@@ -100,12 +101,12 @@ class BgBoard {
   }
 
   flipHorizOrientation() {
-    const dr = this.toggleHoriz();
-    this.setHoriz(dr);
+    this.leftrightFlag = !this.leftrightFlag;
+    this.setHoriz();
     this.showBoard(this.xgidstr);
   }
 
-  setHoriz(dr) {
+  setHoriz() {
     let i, j;
     for (i = 1; i < 7; i++) {
       j = 13 - i;
@@ -119,12 +120,27 @@ class BgBoard {
       BgUtil.swap(this.labels, i, j);
       BgUtil.swap(this.stacks, i, j);
     }
-    this.pointx[26] = (dr == 'R') ? this.rightSideOff : this.leftSideOff
+    this.pointx[26] = (this.leftrightFlag) ? this.leftSideOff : this.rightSideOff
   }
 
-  toggleHoriz() {
-    this.horizOrientation = (this.horizOrientation == 'R') ? 'L' : 'R';
-    return this.horizOrientation;
+  flipTopAndBottom(tbflag) {
+    this.topbottomFlag = tbflag;
+    this.filpDicePos();
+    this.showBoard(this.xgidstr);
+  }
+
+  filpDicePos() {
+    if (this.topbottomFlag) {
+      this.diceimgs[1][0].css({left: this.dice10x});
+      this.diceimgs[1][1].css({left: this.dice11x});
+      this.diceimgs[2][0].css({left: this.dice20x});
+      this.diceimgs[2][1].css({left: this.dice21x});
+    } else {
+      this.diceimgs[1][0].css({left: this.dice20x});
+      this.diceimgs[1][1].css({left: this.dice21x});
+      this.diceimgs[2][0].css({left: this.dice10x});
+      this.diceimgs[2][1].css({left: this.dice11x});
+    }
   }
 
   resetBoard() {
@@ -149,7 +165,7 @@ class BgBoard {
   async showCube(pos, val, offer, crawford){
     const cubepos = BgUtil.cvtTurnXg2kv(pos);
     const cubeval = BgUtil.calcCubeDisp(val, crawford);
-    this.cubeDisp.text(cubeval).css({"top":this.cubeY[cubepos]}).toggleClass("cubeoffer", offer);
+    this.cubeDisp.text(cubeval).css({"top":this.get_cubeYpos(cubepos)}).toggleClass("cubeoffer", offer);
     if (offer) {
       await this.animateCube(1000);
     }
@@ -171,6 +187,7 @@ class BgBoard {
       break;
     }
   }
+
   showDice(turn, d0, d1) {
     const dicepip = {0:"fa-square", 1:"fa-dice-one", 2:"fa-dice-two", 3:"fa-dice-three",
                      4:"fa-dice-four", 5:"fa-dice-five", 6:"fa-dice-six"};
@@ -181,9 +198,10 @@ class BgBoard {
     (d1 == 0) ? this.diceimgs[turn][1].hide() : this.diceimgs[turn][1].show();
   }
 
-  showLabels(turn) {
+  showLabels(xgturn) {
+    const which = (xgturn == 1 && this.topbottomFlag == true) || (xgturn == -1 && this.topbottomFlag == false);
     for (let i = 1; i < 25; i++) {
-      let c = (turn == 0) ? "" : (turn == 1) ? i : 25 - i;
+      let c = (xgturn == 0) ? "" : (which) ? i : 25 - i;
       this.labels[i].text(c);
     }
   }
@@ -201,11 +219,10 @@ class BgBoard {
         for (j = 0; j < num; j++) {
           if (pt == 0 || pt == 25) { //on the bar
             ty = (j > this.barstackthreshold) ? this.barstackthreshold : j;
-            ey = this.barYpos[player] + (ty * this.pieceHeight);
+            ey = this.get_barYpos(player) + (ty * this.pieceHeight);
             st = (num > this.barstackthreshold +1) ? num : "";
           } else { //in field
-            ty = (j > this.pointstackthreshold) ? this.pointstackthreshold : j;
-            ey = (pt > 12) ? this.yupper + (ty * this.pieceHeight) : this.ylower - (ty * this.pieceHeight);
+            ey = this.get_ptYpos(j, pt);
             st = (num > this.pointstackthreshold +1) ? num : "";
           }
           ex = this.pointx[pt];
@@ -224,7 +241,7 @@ class BgBoard {
       ex = this.pointx[26];
       for (i = piecePointer[player]; i < 15; i++) {
         p2move = this.pieces[player][i];
-        ey = this.offYpos[player] + (i * this.boffHeight);
+        ey = this.get_offYpos(player) + (i * this.boffHeight);
         p2move.css({"top":ey, "left":ex, "z-index":10});
         pt = (player == 2) ? 26 : 27;
         this.toPointArray[pt].push(p2move);
@@ -292,20 +309,39 @@ class BgBoard {
 
     if (pt == 26 || pt == 27) { //bear off
       ex = this.pointx[26];
-      ey = this.offYpos[player] + (15 - num - 2) * this.boffHeight; // -2 is draw offset
+      ey = this.get_offYpos(player) + (15 - num - 2) * this.boffHeight; // -2 is draw offset
       st = "";
     } else if (pt == 0 || pt == 25) { //on the bar
       ty = (num > this.barstackthreshold) ? this.barstackthreshold : num;
-      ey = this.barYpos[oppo] + (ty * this.pieceHeight);
+      ey = this.get_barYpos(oppo) + (ty * this.pieceHeight);
       ex = this.pointx[pt];
       st = (num > this.barstackthreshold +1) ? num : "";
     } else { //in field
-      ty = (num > this.pointstackthreshold) ? this.pointstackthreshold : num;
-      ey = (pt > 12) ? this.yupper + (ty * this.pieceHeight) : this.ylower - (ty * this.pieceHeight);
+      ey = this.get_ptYpos(num, pt);
       ex = this.pointx[pt];
       st = (num > this.pointstackthreshold +1) ? num : "";
     }
     return [ex, ey, st];
+  }
+
+  //sub routine for upsidedown
+  get_cubeYpos(turn) {
+    const which = (this.topbottomFlag) ? turn : BgUtil.getOppo(turn);
+    return this.cubeY[which];
+  }
+  get_offYpos(turn) {
+    const which = (this.topbottomFlag) ? turn : BgUtil.getOppo(turn);
+    return this.offYpos[which];
+  }
+  get_barYpos(turn) {
+    const which = (this.topbottomFlag) ? turn : BgUtil.getOppo(turn);
+    return this.barYpos[which];
+  }
+  get_ptYpos(num, pt) {
+    const which = (pt > 12 && this.topbottomFlag == true) || (pt <= 12 && this.topbottomFlag == false);
+    const ty = (num > this.pointstackthreshold) ? this.pointstackthreshold : num;
+    const ey = (which) ? this.yupper + (ty * this.pieceHeight) : this.ylower - (ty * this.pieceHeight);
+    return ey;
   }
 
   bgBoardConfig() {

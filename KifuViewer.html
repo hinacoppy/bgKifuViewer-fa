@@ -18,9 +18,11 @@
 </header>
 
 <section class="mainarea">
-<div id="p1name" class="playername">&nbsp;</div><div id="p1pip" class="pip">&nbsp;</div>
+<div class="mainareaflex">
+<div><div id="p1name" class="playername">&nbsp;</div><div id="p1pip" class="pip">&nbsp;</div></div>
 <div id="mainboard" class="mainboard"><img src="./board.png"></div>
-<div id="p2name" class="playername">&nbsp;</div><div id="p2pip" class="pip">&nbsp;</div>
+<div><div id="p2name" class="playername">&nbsp;</div><div id="p2pip" class="pip">&nbsp;</div></div>
+</div>
 </section>
 
 <nav class="nav">
@@ -56,10 +58,11 @@ Select play:
 <p>Kifu from Internet: <input type="text" id="inetKifuURL"><button id="urldownload"><i class="fas fa-cloud-download-alt"></i></button></p>
 
 <p>
-<button id="gamestart" class="bigbutton"><i class="fas fa-paper-plane fa-2x"></i></button>&emsp;
-<button id="analyse" class="bigbutton"><i class="fas fa-lightbulb fa-2x"></i></button>&emsp;
-<button id="flipHoriz" class="bigbutton"><i class="fas fa-exchange-alt fa-2x"></i></button>&emsp;
-<a href="./"><button class="bigbutton"><i class="fas fa-home fa-2x"></i></button></a>&emsp;
+<button id="gamestart" class="navbutton"><i class="fas fa-paper-plane fa-2x"></i></button>&emsp;
+<button id="flipHoriz" class="navbutton"><i class="fas fa-arrows-alt-h fa-2x"></i></button>&emsp;
+<button id="flipVert" class="navbutton"><i class="fas fa-arrows-alt-v fa-2x"></i></button>&emsp;
+<button id="analyse" class="navbutton"><i class="fas fa-lightbulb fa-2x"></i></button>&emsp;
+<a href="./"><button class="navbutton"><i class="fas fa-home fa-2x"></i></button></a>&emsp;
 </p>
 <br><br>
 <p id="rolldisp" class="infodisp">&nbsp;</p>
