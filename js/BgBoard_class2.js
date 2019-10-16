@@ -126,6 +126,7 @@ class BgBoard {
   flipTopAndBottom(tbflag) {
     this.topbottomFlag = tbflag;
     this.filpDicePos();
+    this.filpStackPos();
     this.showBoard(this.xgidstr);
   }
 
@@ -140,6 +141,17 @@ class BgBoard {
       this.diceimgs[1][1].css({left: this.dice21x});
       this.diceimgs[2][0].css({left: this.dice10x});
       this.diceimgs[2][1].css({left: this.dice11x});
+    }
+  }
+
+  filpStackPos() {
+    for (let i = 0; i < 26; i++) {
+      let which = (i > 12 && this.topbottomFlag == true) || (i <= 12 && this.topbottomFlag == false);
+      let ey = (which) ? this.yupper + (this.pointstackthreshold * this.pieceHeight)
+                       : this.ylower - (this.pointstackthreshold * this.pieceHeight);
+      ey = (i == 0)  ? this.get_barYpos(1) + (this.barstackthreshold * this.pieceHeight) : ey;
+      ey = (i == 25) ? this.get_barYpos(2) + (this.barstackthreshold * this.pieceHeight) : ey;
+      this.stacks[i].css({top: ey});
     }
   }
 
