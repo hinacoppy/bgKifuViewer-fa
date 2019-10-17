@@ -51,6 +51,7 @@ class BgGame {
     this.animSpeed   = $('[name=animspeed]');
     this.animFlag    = $("#animFlag");
     this.waitFlag    = $("#waitFlag");
+    this.autoFlag    = $("#autoFlag");
     this.urlInputTag = $("#inetKifuURL");
     this.kifuDnDArea = $("#dropzone");
 
@@ -150,16 +151,24 @@ class BgGame {
   async loopAutoplay() {
     while (this.autoplay) {
       await this.gotoPlay(+1);
-      if (this.waitFlag.prop("checked")) {
-        await BgUtil.sleep(this.waitDelay);
-      }
+      let wait = (this.waitFlag.prop("checked")) ? this.waitDelay : 20;
+      await BgUtil.sleep(wait);
     }
+  }
+
+  async autoNextGame() {
+    await BgUtil.sleep(this.waitDelay * 3);
+    this.gotoGame(+1);
+    this.startAutoplay();
   }
 
   async gotoPlay(delta) {
     const playnum = this.curRollNo + delta;
     if (playnum < 1 || playnum > this.playLength) {
       this.stopAutoplay();
+      if (this.autoFlag.prop("checked")) {
+        this.autoNextGame();
+      }
       return;
     }
     this.goForward = (delta > 0) ? true : false;
@@ -172,7 +181,6 @@ class BgGame {
   }
 
   async playMove(playnum) {
-//console.log("playMove", playnum);
     let rdisp;
     this.curRollNo = playnum;
     const playo = this.playObject[playnum -1];
@@ -200,7 +208,6 @@ class BgGame {
     this.analysisDisp.text("");
     if (this.animFlag.prop("checked") && this.goForward) {
       this.setControllerProp("animation");
-      await this.board.animateDice(1000); //ダイスを揺らし、揺れ終わるのを待つ(引数=msec)
       await this.animMove(playnum); //チェッカーを動かし、動き終わるのを待つ
       this.setControllerProp(this.curControlProp);
     } else {
@@ -223,6 +230,10 @@ class BgGame {
     const action = playo.action;
     const move = playo.move;
 
+    if (action == "roll") {
+      await this.board.animateDice(this.animDelay); //ダイスを揺らし、揺れ終わるのを待つ(引数=msec)
+    }
+
     if (action == "roll" && BgUtil.isContain(move, "/")) {
       const moveary = BgUtil.cleanupMoveStr(move, xgbf.xgidstr);
       for (let n = 0; n < moveary.length; n++) {
@@ -236,9 +247,11 @@ class BgGame {
     }
     this.board.showBoard2(xgaf);
     this.pipDisp[playo.turn].text("pip= " + xgaf.get_pip(xgaf.turn));
-//console.log("animMove", playo.turn, xgaf.turn, xgaf.get_pip(xgaf.turn));
-  }
 
+    if (action == "offer") {
+      await this.board.animateCube(this.animDelay); //キューブを揺すのはshowBoard()の後
+    }
+  }
 
   loadLocalKifu(evt) {
     const file = evt.target.files[0];
@@ -253,7 +266,7 @@ class BgGame {
   }
 
   readKifuFile(file) {
-    this.kifuDnDArea.text(this.inline_trim(file.name));
+    this.kifuDnDArea.text(this.trimFilename(file.name));
 
     const reader = new FileReader();
     reader.readAsText(file); //テキスト形式で読み込む
@@ -268,7 +281,6 @@ class BgGame {
   //AJAXで、棋譜ファイルを取得
   //サーバ内ローカル、インターネットURLの両方に対応
   loadInetKifuAjax(query) {
-//console.log("loadInetKifuAjax", query);
 
     $.ajax({
       url: 'bg_kifu_ajax.php'+query,
@@ -291,14 +303,13 @@ class BgGame {
   loadServerKifuAjax(query) {
     const file = query.substr("?s=".length);
     const filepath = "/bgKifuViewer-fa/scripts/" + file;
-console.log("loadServerKifuAjax", query, filepath);
     $.ajax({
       url: filepath,
       method: 'GET',
       dataType: "text"
     }).done((d) => {
       if (!BgUtil.isContain(d, "ERROR")) {
-        this.kifuDnDArea.text(this.inline_trim(file));
+        this.kifuDnDArea.text(this.trimFilename(file));
         this.gamesource.val(d);
         this.getGameSource();
       } else {
@@ -526,7 +537,7 @@ console.log("loadServerKifuAjax", query, filepath);
   }
 
   makePlayObj(tn, ac, dc, mv, cb, xg, af) {
-    return {"turn": tn, "action": ac, "dice": dc, "move": mv, "cube": cb, "bfxgid": xg, "xgid": af}; 
+    return {"turn": tn, "action": ac, "dice": dc, "move": mv, "cube": cb, "bfxgid": xg, "xgid": af};
   }
 
   chkAction(play) {
@@ -606,7 +617,6 @@ console.log("loadServerKifuAjax", query, filepath);
 //      const gnubgurl =  'http://ldap.example.com/cgi-bin/gnubg_ajax.cgi?g='+xgid+'&n='+num;
 //      const gnubgurl =  'http://local.example.com/cgi-bin/gnubg_ajax.cgi?g='+xgid+'&d='+depth+'&n='+num; //kagoya local
 //      const gnubgurl =  'https://v153-127-246-44.vir.kagoya.net:17500/gnubg_ajax.js?g='+xgid+'&d='+depth+'&n='+num; //Node.js
-//console.log("get_gnuanalysis_ajax",gnubgurl);
     this.analysisDisp.html('<i class="fas fa-spinner fa-pulse fa-3x" style="color:purple"></i>');
 
     // $.ajax return promise
@@ -622,7 +632,6 @@ console.log("loadServerKifuAjax", query, filepath);
   }
 
   async analyseByGnubg() {
-//console.log("analyse_gnubg");
     const playo = this.playObject[this.curRollNo -1];
     let xgid = "XGID=-b----E-C---eE---c-e----B-:0:0:1:00:0:0:0:0:10";
     if (playo !== void 0) { // playo is not 'undefined'
@@ -663,11 +672,12 @@ console.log("loadServerKifuAjax", query, filepath);
     return BgUtil.isContain(hostname, "localhost");
   }
 
-  inline_trim(str, len = 60) {
-    if (str.length < len) { return str; }
-    const len2 = Math.floor(len / 2);
-    const f = str.substr(0, len2);
-    const t = str.substr(-1 * len2);
+  trimFilename(str, len = 50) {
+    const s = decodeURI(str).split('/').slice(-1)[0];
+    if (s.length < len) { return s; }
+    const n = len / 2;
+    const f = s.substr(0, n);
+    const t = s.substr(-1 * n);
     return f + "..." + t;
   }
 
