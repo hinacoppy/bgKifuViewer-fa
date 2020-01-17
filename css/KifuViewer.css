@@ -58,58 +58,20 @@ body{
   grid-area: aside;
 }
 
-.mainboard{
-  position: relative;
+/* Constant definision for bgBoard.css ------------------------------ */
+:root{
+  --boardHeightNum: 70;
+  --boardWidthNum: 45;
+  --pointWidthNum: 3;
+  --cubeSizeNum: 2.7;
+  --frameSizeNum: 1.3;
+  --offtrayMarginNum: 5;
+  --offtrayHeightNum: 70; /* bgBoardApp=49, other=boardHeightNum */
+  --cubeFontSizeNum: 2;
+  --labelFontSizeNum: 0.8;
+  --stackFontSizeNum: 1.5;
 }
 
-.cube{
-  position: absolute;
-  text-align: center;
-  line-height: 40px;
-  text-align: center;
-  color: black;
-  font-size: 16pt;
-  font-weight: bold;
-  color: white; /* normal cube */
-  background-color: olive;
-}
-
-.cubeoffer{
-  color: blue;
-  background-color: violet;
-}
-
-.dice{
-  position: absolute;
-  font-size: 35px;
-}
-
-.label{
-  position: absolute;
-  text-align: center;
-  color: white;
-  font-size: 8pt;
-  width: 30px;
-}
-
-.stack{
-  position: absolute;
-  text-align: center;
-  font-weight: bold;
-  font-size: 12pt;
-  padding-top: 2px;
-  line-height: 30px;
-  width: 30px;
-  z-index: 30;
-}
-
-.chequer{
-  position: absolute;
-  width: 30px;
-  font-size: 30px;
-  line-height: 30px;
-  z-index: 10;
-}
 
 .pagetitle{
   font-weight: bold;
