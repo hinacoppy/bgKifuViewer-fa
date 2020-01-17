@@ -26,7 +26,8 @@ class BgGame {
     this.topbottomFlag = true;
     this.xgidstr = "";
     this.crawford = false;
-    this.board = new BgBoard();
+    this.board = new BgBoard("bgKifuViewer");
+    this.board.resetBoard();
     this.playObject = [];
     this.setDomNames();
     this.setEventHandler();
@@ -238,8 +239,7 @@ class BgGame {
       const moveary = BgUtil.cleanupMoveStr(move, xgbf.xgidstr);
       for (let n = 0; n < moveary.length; n++) {
         this.moveDisp.html( BgUtil.makeMoveStr(moveary, n) );
-        const fromto = moveary[n].split("/");
-        await this.board.animateChequer(xgbf, fromto[0], fromto[1], this.animDelay, n);
+        await this.board.animateChequer(xgbf, moveary[n], this.animDelay);
       }
     } else {
       this.moveDisp.text( move );
@@ -575,7 +575,7 @@ class BgGame {
       break;
     case "offer":
       xgid.cube = BgUtil.calcCubeValRev(cb); // 8 => 3
-      xgid.cubepos = BgUtil.cvtTurnKv2xg(BgUtil.getOppo(tn));
+      xgid.cubepos = BgUtil.cvtTurnKv2xg(BgUtil.getBdOppo(tn));
       xgid.dbloffer = true;
       break;
     case "take":
