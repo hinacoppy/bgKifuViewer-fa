@@ -3,11 +3,11 @@
   "short_name": "bgKifuViewer",
   "start_url": "/bgKifuViewer-fa/index.html",
   "scope": "/bgKifuViewer-fa/",
-  "display": "standalone",
+  "display": "fullscreen",
   "background_color": "#efe",
   "theme_color": "#efe",
   "description": "バックギャモン棋譜ビューア",
-  "copyright": "(C)hinacoppy 2018-2019",
+  "copyright": "(C)hinacoppy 2018-2020",
   "orientation": "landscape",
   "icons": [{
     "src": "icon/favicon.ico",
