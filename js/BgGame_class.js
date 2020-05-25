@@ -692,7 +692,7 @@ class BgGame {
     this.nextGameBtn. on('click', () => { this.gotoGame(+1); });
     this.goGameBtn.   on('click', () => { this.jumpToGame(); });
     this.startBtn.    on('click', () => { this.getGameSource(); });
-    this.flipHorizBtn.on('click', () => { this.board.flipHorizOrientation(); /*this.flipHorizOrientation();*/ });
+    this.flipHorizBtn.on('click', () => { this.board.flipHorizOrientation(); this.board.flipHorizFlag(); });
     this.flipVertBtn .on('click', () => { this.flipTopAndBottom(); });
 
     this.speedController.on('change', () => {
@@ -759,8 +759,13 @@ class BgGame {
     });
 
     //モーダル画面の閉じるボタンクリック
-    $('#closeResult').on('click', function(e) {
+    $('#closeResult').on('click', (evt) => {
       $('#analysisResult').fadeOut();
+    });
+
+    //画面の大きさが変わったときはボードを再描画
+    $(window).on('resize', (evt) => {
+      this.board.redraw();
     });
 
   }
