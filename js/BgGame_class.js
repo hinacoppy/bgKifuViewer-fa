@@ -692,7 +692,7 @@ class BgGame {
     this.nextGameBtn. on('click', () => { this.gotoGame(+1); });
     this.goGameBtn.   on('click', () => { this.jumpToGame(); });
     this.startBtn.    on('click', () => { this.getGameSource(); });
-    this.flipHorizBtn.on('click', () => { this.board.flipHorizOrientation(); this.board.flipHorizFlag(); });
+    this.flipHorizBtn.on('click', () => { this.board.flipHorizFlag(); this.board.flipHorizOrientation(); });
     this.flipVertBtn .on('click', () => { this.flipTopAndBottom(); });
 
     this.speedController.on('change', () => {
