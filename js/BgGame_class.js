@@ -710,14 +710,24 @@ class BgGame {
       this.loadInetKifuAjax(query);
     });
 
+    //モーダルウィンドウを準備(ボタンクリックで表示)
+    this.analyseBtn.funcHoverDiv({
+      hoverid:  '#analysis',
+      headid:   '#analysisHeader',
+      bodyid:   '#analysisBody',
+      maxbtn:   '#maxBtnAnl',
+      minbtn:   '#minBtnAnl',
+      closebtn: '#closeBtnAnl',
+      width:    '40%',
+      height:   '450px'
+    });
+
     this.analyseBtn.on('click', () => {
       if (this.isGithub()) {
         alert('Sorry, this feature is inactive.'); //githubで稼働しているときはgnubgの解析機能は営業停止
         return;
       }
       this.analyseByGnubg();
-      $('#analysisResult > .modalContents').css("max-width", "none");
-      $('#analysisResult').fadeIn();
     });
 
     $(window).on('keydown', (evt) => { this.kbdNavigation(evt); });
@@ -758,15 +768,15 @@ class BgGame {
       evt.preventDefault();
     });
 
-    //モーダル画面の閉じるボタンクリック
-    $('#closeResult').on('click', (evt) => {
-      $('#analysisResult').fadeOut();
-    });
-
     //画面の大きさが変わったときはボードを再描画
     $(window).on('resize', (evt) => {
       this.board.redraw();
     });
+
+    //GitHubで使わない機能は非表示
+    if (this.isGithub()) {
+      $('.hidewhengithub').hide();
+    }
 
   }
 
