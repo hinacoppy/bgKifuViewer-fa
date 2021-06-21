@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
 <meta name="description" content="Backgammon Kifu Viewer">
-<meta name="author" content="(C)hinacoppy 2018-2020">
+<meta name="author" content="(C)hinacoppy 2018-2021">
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="css/KifuViewer.css">
 <link rel="stylesheet" href="/css/bgBoard.css">
@@ -63,13 +63,15 @@ Select play:
 
 <p>Kifu from Local: <input type="file" id="localKifuFile"></p>
 <p id="dropzone" class="dropzone">Kifu file Drag and Drop Here</p>
-<p>Kifu from Internet: <input type="text" id="inetKifuURL"><button id="urldownload"><i class="fas fa-cloud-download-alt"></i></button></p>
+<p class="hidewhengithub">Kifu from Internet: <input type="text" id="inetKifuURL"><button id="urldownload"><i class="fas fa-cloud-download-alt"></i></button></p>
 
 <p>
 <button id="gamestart" class="navbutton"><i class="fas fa-paper-plane fa-2x"></i></button>&emsp;
 <button id="flipHoriz" class="navbutton"><i class="fas fa-arrows-alt-h fa-2x"></i></button>&emsp;
 <button id="flipVert" class="navbutton"><i class="fas fa-arrows-alt-v fa-2x"></i></button>&emsp;
+<span class="hidewhengithub">
 <button id="analyse" class="navbutton"><i class="fas fa-lightbulb fa-2x"></i></button>&emsp;
+</span>
 <a href="./"><button class="navbutton"><i class="fas fa-home fa-2x"></i></button></a>&emsp;
 </p>
 <br><br>
@@ -86,23 +88,26 @@ Select play:
 <textarea id="gamescript" cols="70" rows="20" style="display:none"></textarea>
 </aside>
 
-<section id="analysisResult" class="modalArea">
-  <div class="modalContents">
-    <h3 class="modalTitleContainer">
-      <span class="modalTitle">Analysis Result</span>
-      <button id="closeResult" class="closeModal"><i class="fas fa-times"></i></button>
-    </h3>
+<section id="analysis" class="modalContainer hidewhengithub">
+  <div id="analysisHeader" class="modalTitle">
+    <span class="modalTitleText">Analysis Result</span>
+    <button id="maxBtnAnl"><i class="fas fa-window-maximize"></i></button>
+    <button id="minBtnAnl"><i class="fas fa-window-minimize"></i></button>
+    <button id="closeBtnAnl"><i class="fas fa-window-close"></i></button>
+  </div>
+  <div id="analysisBody" class="modalBody">
     <pre id="analysisresult"></pre>
   </div>
 </section>
 
 <script src="/js/fontawesome-all.min.js" defer></script>
-<script src="/js/jquery-3.4.1.min.js"></script>
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/js/jquery.funcHoverDiv2.js"></script>
 <script src="/js/BgUtil_class.js"></script>
 <script src="/js/BgXgid_class.js"></script>
 <script src="/js/BgChequer_class.js"></script>
 <script src="/js/BgBoard_class.js"></script>
-<script src="js/BgGame_class.js"></script>
+<script src="./js/BgGame_class.js"></script>
 <script>
 myGame = new BgGame();
 </script>
