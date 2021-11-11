@@ -711,7 +711,7 @@ class BgGame {
     });
 
     //モーダルウィンドウを準備(ボタンクリックで表示)
-    this.analyseBtn.funcHoverDiv({
+    this.analyseWindow = new FloatWindow({
       hoverid:  '#analysis',
       headid:   '#analysisHeader',
       bodyid:   '#analysisBody',
@@ -728,6 +728,7 @@ class BgGame {
         return;
       }
       this.analyseByGnubg();
+      this.analyseWindow.show();
     });
 
     $(window).on('keydown', (evt) => { this.kbdNavigation(evt); });
