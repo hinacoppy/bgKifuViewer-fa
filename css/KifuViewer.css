@@ -1,24 +1,19 @@
 /**
   KifuViewer.css
-  designed by hinacoppy 2018
+  designed by hinacoppy 2018 -- 2021
 */
 
-/* document outline ----------------------------------------- */
-*{
-  user-select:none; /* タップ、ドラッグで文字選択しないように */
-}
 html{
-  height:100%;
-  overflow:scroll;
-  overscroll-behavior:none; /* バウンススクロールを抑止(only for Android) */
+  height: 100%;
 }
+
 body{
-  margin:0;
-  padding:0;
-  min-height:100%;
-  height:100%;
-  font-family:'Arial', 'Meiryo UI';
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  height: 100%;
 }
+
 .container{
   background: #efe;
   display: grid; /* Grid Layout でコンテンツを配置 */
@@ -128,39 +123,30 @@ body{
 }
 
 /* モーダルウィンドウCSS */
-/* 参考：https://myscreate.com/pure-modal/ */
-/* 参考：https://ameblo.jp/mikuxmiku/entry-10358513809.html */
-.modalArea{
-  display: none;
-  position: fixed;
-  z-index: 50;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(30,30,30,0.7);
-}
-.modalTitleContainer{
-  font-weight: bold;
-  background: #777;
-  color: white;
-  padding: 5px;
-  text-align: right;
-}
-.modalTitle{
-  float:left;
-}
-.modalContents{
-  position: absolute;
-  top: 50%; /* 画面の中央寄せ */
-  left: 50%;
-  transform:translate(-50%,-50%);
-  width: 70%;
-  max-width: 432px;
-  padding: 0px 30px 10px 30px;
-  background-color: #ffe;
+/* 参考：http://webnonotes.com/javascript-2/fake-window/ */
+.modalContainer{
+  background-color:#ffe;
   border:solid #00f 2px;
 }
-.closeModal{
-  cursor: pointer;
+.modalContainer button{ /* ボタン */
+  cursor:pointer;
+  margin-right:5px;
+}
+.modalTitle{
+  width: 100%;
+  height:35px;
+  line-height:35px; /* 上下中央揃え */
+  font-weight:bold;
+  text-indent:1em;
+  background:#777;
+  color:white;
+  text-align:right;
+  cursor:move;
+}
+.modalTitleText{
+  float:left; /* 閉じるボタンを右寄せ */
+}
+.modalBody{ /* データ表示 */
+  margin-top:35px; /* ヘッダ分開ける */
+  padding:20px;
 }

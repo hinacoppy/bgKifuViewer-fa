@@ -2,7 +2,7 @@
 // (参考) https://qiita.com/kaihar4/items/c09a6d73e190ab0b9b01
 'use strict';
 
-const CACHE_NAME = "bgKifuViewer-v20210621";
+const CACHE_NAME = "bgKifuViewer-v20210803";
 const ORIGIN = (location.hostname == 'localhost') ? '' : location.protocol + '//' + location.hostname;
 
 const STATIC_FILES = [
@@ -19,9 +19,10 @@ const STATIC_FILES = [
   ORIGIN + '/bgKifuViewer-fa/js/BgGame_class.js',
   ORIGIN + '/css/font-awesome-animation.min.css',
   ORIGIN + '/css/BgBoard.css',
+  ORIGIN + '/css/FloatWindow2.css',
   ORIGIN + '/js/fontawesome-all.min.js',
   ORIGIN + '/js/jquery-3.6.0.min.js',
-  ORIGIN + '/js/jquery.funcHoverDiv2.js',
+  ORIGIN + '/js/FloatWindow2.js',
   ORIGIN + '/js/BgBoard_class.js',
   ORIGIN + '/js/BgChequer_class.js',
   ORIGIN + '/js/BgXgid_class.js',
