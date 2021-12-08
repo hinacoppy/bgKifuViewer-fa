@@ -113,6 +113,7 @@ class BgGame {
   }
 
   flipHorizOrientation() {
+    this.board.flipHorizFlag();
     this.board.flipHorizOrientation();
   }
 
