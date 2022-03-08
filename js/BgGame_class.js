@@ -237,9 +237,9 @@ class BgGame {
     }
 
     if (action == "roll" && BgUtil.isContain(move, "/")) {
-      const moveary = BgUtil.cleanupMoveStr(move, xgbf.xgidstr);
+      const moveary = BgMoveStrUtil.cleanupMoveStr(move, xgbf.xgidstr);
       for (let n = 0; n < moveary.length; n++) {
-        this.moveDisp.html( BgUtil.makeMoveStr(moveary, n) );
+        this.moveDisp.html( BgMoveStrUtil.makeMoveStr(moveary, n) );
         await this.board.animateChequer(xgbf, moveary[n], this.animDelay);
       }
     } else {
@@ -572,7 +572,7 @@ class BgGame {
       break;
     case "move":
       xgid.dice = dc;
-      xgid.position = xgid.moveChequer(xgid.position, mv, xgid.turn);
+      xgid.position = xgid.getMovedPosition(xgid.position, mv, xgid.turn);
       break;
     case "offer":
       xgid.cube = BgUtil.calcCubeValRev(cb); // 8 => 3

@@ -2,7 +2,7 @@
 // (参考) https://qiita.com/kaihar4/items/c09a6d73e190ab0b9b01
 'use strict';
 
-const CACHE_NAME = "bgKifuViewer-v20210803";
+const CACHE_NAME = "bgKifuViewer-v20220308";
 const ORIGIN = (location.hostname == 'localhost') ? '' : location.protocol + '//' + location.hostname;
 
 const STATIC_FILES = [
@@ -16,6 +16,7 @@ const STATIC_FILES = [
   ORIGIN + '/bgKifuViewer-fa/icon/android-chrome-192x192.png',
   ORIGIN + '/bgKifuViewer-fa/icon/android-chrome-512x512.png',
   ORIGIN + '/bgKifuViewer-fa/css/KifuViewer.css',
+  ORIGIN + '/bgKifuViewer-fa/js/BgMoveStrUtil_class.js',
   ORIGIN + '/bgKifuViewer-fa/js/BgGame_class.js',
   ORIGIN + '/css/font-awesome-animation.min.css',
   ORIGIN + '/css/BgBoard.css',
