@@ -139,14 +139,14 @@ class BgGame {
 
   startAutoplay() {
     this.autoplay = true;
-    this.autoPlayBtn.html("<i class='far fa-pause-circle fa-2x'></i>");
+    this.autoPlayBtn.html("<i class='fas fa-pause-circle fa-2x'></i>");
     this.setControllerProp("autoplay");
     this.loopAutoplay();
   }
 
   stopAutoplay() {
     this.autoplay = false;
-    this.autoPlayBtn.html("<i class='far fa-play-circle fa-2x'></i>");
+    this.autoPlayBtn.html("<i class='fas fa-play-circle fa-2x'></i>");
     this.setControllerProp("manualplay");
   }
 
