@@ -121,32 +121,3 @@ body{
   margin-bottom: 10px;
   /*font-size: 120%;*/
 }
-
-/* モーダルウィンドウCSS */
-/* 参考：http://webnonotes.com/javascript-2/fake-window/ */
-.modalContainer{
-  background-color:#ffe;
-  border:solid #00f 2px;
-}
-.modalContainer button{ /* ボタン */
-  cursor:pointer;
-  margin-right:5px;
-}
-.modalTitle{
-  width: 100%;
-  height:35px;
-  line-height:35px; /* 上下中央揃え */
-  font-weight:bold;
-  text-indent:1em;
-  background:#777;
-  color:white;
-  text-align:right;
-  cursor:move;
-}
-.modalTitleText{
-  float:left; /* 閉じるボタンを右寄せ */
-}
-.modalBody{ /* データ表示 */
-  margin-top:35px; /* ヘッダ分開ける */
-  padding:20px;
-}
