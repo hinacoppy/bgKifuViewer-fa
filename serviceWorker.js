@@ -2,7 +2,7 @@
 // (参考) https://developer.mozilla.org/ja/docs/Web/Progressive_web_apps/Offline_Service_workers
 'use strict';
 
-const cacheName = 'bgKifuViewer-v20220308';
+const cacheName = 'bgKifuViewer-v20240611';
 const ORIGIN = (location.hostname == 'localhost') ? '' : location.protocol + '//' + location.hostname;
 
 const contentToCache = [
@@ -20,10 +20,10 @@ const contentToCache = [
   ORIGIN + '/bgKifuViewer-fa/js/BgGame_class.js',
   ORIGIN + '/css/font-awesome-animation.min.css',
   ORIGIN + '/css/BgBoard.css',
-  ORIGIN + '/css/FloatWindow2.css',
-  ORIGIN + '/js/fontawesome-all.min.js',
-  ORIGIN + '/js/jquery-3.6.0.min.js',
-  ORIGIN + '/js/FloatWindow2.js',
+  ORIGIN + '/css/FloatWindow4.css',
+  ORIGIN + '/js/fontawesome-inuse.min.js',
+  ORIGIN + '/js/jquery-3.7.1.min.js',
+  ORIGIN + '/js/FloatWindow4.js',
   ORIGIN + '/js/BgBoard_class.js',
   ORIGIN + '/js/BgChequer_class.js',
   ORIGIN + '/js/BgXgid_class.js',
@@ -36,13 +36,16 @@ self.addEventListener('install', (e) => {
       return cache.addAll(contentToCache);
     })
   );
+  self.skipWaiting();
 });
 self.addEventListener('fetch', (e) => {
   e.respondWith(
     caches.match(e.request).then((r) => {
       return r || fetch(e.request).then((response) => {
         return caches.open(cacheName).then((cache) => {
-          cache.put(e.request, response.clone());
+          if (e.request.url.startsWith('http')) { //ignore chrome-extention: request (refuse error msg)
+            cache.put(e.request, response.clone());
+          }
           return response;
         });
       });
